@@ -8,8 +8,6 @@ import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.core.registries.Registries
 import net.minecraft.world.item.CreativeModeTab
 import net.minecraft.world.item.CreativeModeTabs
-import net.minecraft.world.item.Item
-import net.minecraft.world.level.block.Blocks
 import net.neoforged.bus.api.IEventBus
 import net.neoforged.fml.ModContainer
 import net.neoforged.fml.common.Mod
@@ -20,7 +18,6 @@ import net.neoforged.neoforge.client.gui.IConfigScreenFactory
 import net.neoforged.neoforge.common.NeoForge
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent
 import net.neoforged.neoforge.registries.DeferredRegister
-import java.util.function.Consumer
 
 @Mod(GearsOfDiscoveryMod.MODID)
 class GearsOfDiscoveryMod(modEventBus: IEventBus, modContainer: ModContainer) {
@@ -68,17 +65,6 @@ class GearsOfDiscoveryMod(modEventBus: IEventBus, modContainer: ModContainer) {
     private fun commonSetup(event: FMLCommonSetupEvent) {
         // Some common setup code
         LOGGER.info("HELLO FROM COMMON SETUP")
-
-        if (Config.logDirtBlock) LOGGER.info("DIRT BLOCK >> {}", BuiltInRegistries.BLOCK.getKey(Blocks.DIRT))
-
-        LOGGER.info(Config.magicNumberIntroduction + Config.magicNumber)
-
-        Config.items.forEach(Consumer { item: Item ->
-            LOGGER.info(
-                "ITEM >> {}",
-                item.toString()
-            )
-        })
     }
 
     private fun addCreative(event: BuildCreativeModeTabContentsEvent) {
