@@ -1,17 +1,21 @@
 package gg.wildblood.gearsofdiscovery.tabs
 
-import gg.wildblood.gearsofdiscovery.GearsOfDiscoveryMod.Companion.CreativeModeTabRegister
+import gg.wildblood.gearsofdiscovery.GearsOfDiscoveryMod
 import gg.wildblood.gearsofdiscovery.items.ModItems
+import net.minecraft.core.registries.Registries
 import net.minecraft.network.chat.Component
 import net.minecraft.world.item.CreativeModeTab
 import net.minecraft.world.item.CreativeModeTab.ItemDisplayParameters
 import net.minecraft.world.item.CreativeModeTabs
 import net.minecraft.world.item.Items
-import net.neoforged.neoforge.registries.DeferredHolder
-import java.util.function.Supplier
+import net.neoforged.neoforge.registries.DeferredRegister
+
+import thedarkcolour.kotlinforforge.neoforge.forge.getValue
 
 object ModCreativeTabs {
-    val gearsOfDiscoveryCreativeTab: DeferredHolder<CreativeModeTab, CreativeModeTab> = CreativeModeTabRegister.register("gearsofdiscovery_tab", Supplier {
+    val REGISTRY: DeferredRegister<CreativeModeTab> = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, GearsOfDiscoveryMod.MODID)
+
+    val gearsOfDiscoveryCreativeTab: CreativeModeTab by REGISTRY.register("gearsofdiscovery_tab") { ->
         CreativeModeTab.builder()
             .title(Component.translatable("itemGroup.gearsofdiscovery"))
             .withTabsBefore(CreativeModeTabs.COMBAT)
@@ -20,7 +24,7 @@ object ModCreativeTabs {
                 output.accept(Items.CLOCK)
                 output.accept(ModItems.SMALL_ENGINEERING_BUNDLE)
             }.build()
-    })
+    }
 
     fun register() {}
 }
