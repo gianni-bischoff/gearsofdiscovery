@@ -25,6 +25,4 @@ object ModCreativeTabs {
                 output.accept(ModItems.SMALL_ENGINEERING_BUNDLE)
             }.build()
     }
-
-    fun register() {}
 }

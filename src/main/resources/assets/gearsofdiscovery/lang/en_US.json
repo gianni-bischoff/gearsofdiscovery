@@ -1,7 +1,7 @@
 {
-  "config.gearsofdiscovery.logDirtBlock": "Log Dirt Block?",
-  "config.gearsofdiscovery.magicNumber": "Magic Number",
-  "config.gearsofdiscovery.magicNumberIntroduction": "Magic Number Message",
-  "config.gearsofdiscovery.items": "A list of items to log on common setup.",
+  "gearsofdiscovery.configuration.title": "Gears Of Discovery",
+  "config.gearsofdiscovery.dimensionLock": "Enable Dimension Locking",
+  "config.gearsofdiscovery.itemUseLock": "Enable Item Use Locking",
+  "config.gearsofdiscovery.craftLock": "Enable Recipe Locking",
   "itemGroup.gearsofdiscovery": "Gears of Discovery"
 }
