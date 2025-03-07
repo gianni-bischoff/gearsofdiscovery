@@ -32,8 +32,10 @@ object Config {
 
     @SubscribeEvent
     fun onLoad(event: ModConfigEvent) {
-        dimensionLock = DIMENSION_LOCK.get()
-        itemUseLock = ITEM_USE_LOCK.get()
-        craftLock = CRAFT_LOCK.get()
+        event.config.loadedConfig?.let { config ->
+            dimensionLock = DIMENSION_LOCK.get()
+            itemUseLock = ITEM_USE_LOCK.get()
+            craftLock = CRAFT_LOCK.get()
+        }
     }
 }
