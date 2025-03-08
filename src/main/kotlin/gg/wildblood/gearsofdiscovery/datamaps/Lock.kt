@@ -52,17 +52,19 @@ data class Lock(
         return this.items.filter { !it.startsWith("#") }.contains(BuiltInRegistries.ITEM.getKey(item).asString())
     }
 
-    enum class Type {
-        ITEM_USE,
-        INTERACT_WITH,
-        RECIPE,
-        DIMENSION,
-        BREAK_BLOCK;
+    enum class Type(val displayName: String) {
+        ITEM_USE("item_use"),
+        INTERACT_WITH("interact_with"),
+        RECIPE("recipe"),
+        DIMENSION("dimension"),
+        BREAK_BLOCK("break_block");
+
 
         companion object {
-            val CODEC = Codec.STRING.xmap(Type::valueOf, Type::name)
+            fun from(displayName: String) = entries.firstOrNull() { it.displayName == displayName } ?: ITEM_USE
+            val CODEC = Codec.STRING.xmap(::from, Type::displayName)
         }
     }
 }
 
-private fun ResourceLocation.asString(): String = this.namespace + ":" + this.path
+fun ResourceLocation.asString(): String = this.namespace + ":" + this.path
