@@ -25,15 +25,29 @@ class LockDataProvider(
         locks.add(Lock(
             "fish",
             "Locks all Fishes",
-            "itemUse",
+            Lock.Type.ITEM_USE,
             listOf("#c:foods")
         ))
 
         locks.add(Lock(
             "nodirt",
             "No dirt in my Hood.",
-            "itemUse",
+            Lock.Type.ITEM_USE,
             listOf("minecraft:dirt")
+        ))
+
+        locks.add(Lock(
+            "disable_end",
+            "Disable End.",
+            Lock.Type.DIMENSION,
+            listOf("minecraft:the_end")
+        ))
+
+        locks.add(Lock(
+            "disable_end_portal_interact",
+            "Disable End portal interaction.",
+            Lock.Type.INTERACT_WITH,
+            listOf("minecraft:end_portal")
         ))
 
         val registryBuilder = RegistrySetBuilder().add(LOCK_REGISTRY_KEY) { bootstrap ->

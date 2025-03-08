@@ -2,41 +2,34 @@ package gg.wildblood.gearsofdiscovery.datamaps
 
 import com.mojang.serialization.Codec
 import com.mojang.serialization.codecs.RecordCodecBuilder
-import gg.wildblood.gearsofdiscovery.config.LockSavedData
-import net.minecraft.client.Minecraft
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.resources.ResourceLocation
-import net.minecraft.server.MinecraftServer
 import net.minecraft.tags.TagKey
-import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
-import net.minecraft.world.level.Level
 import java.util.stream.Stream
+
 
 data class Lock(
     val name: String,
     val description: String,
-    val type: String,
-    val items: List<String>
+    val type: Type,
+    val items: List<String>,
+    var enabled: Boolean = true
 ) {
     companion object {
         val CODEC: Codec<Lock> = RecordCodecBuilder.create { instance: RecordCodecBuilder.Instance<Lock> ->
             instance.group(
                 Codec.STRING.fieldOf("name").forGetter(Lock::name),
                 Codec.STRING.fieldOf("description").forGetter(Lock::description),
-                Codec.STRING.fieldOf("type").forGetter(Lock::type),
+                Type.CODEC.fieldOf("type").forGetter(Lock::type),
                 Codec.list(Codec.STRING).fieldOf("items").forGetter(Lock::items)
             ).apply(instance, ::Lock)
         }
     }
 
-    fun isItemLocked(itemStack: ItemStack, player: Player) : Boolean {
-        return isLockEnabled(player)?.and(containsAny(itemStack.tags).xor(contains(itemStack.item))) ?: false
-    }
-
-    private fun isLockEnabled(player: Player): Boolean? {
-        return LockSavedData.get(player)?.getLocks()?.contains(name)
+    fun isItemLocked(itemStack: ItemStack) : Boolean {
+        return enabled.and(containsAny(itemStack.tags).xor(contains(itemStack.item)))
     }
 
     /**
@@ -57,6 +50,18 @@ data class Lock(
      */
     private fun contains(item: Item) : Boolean {
         return this.items.filter { !it.startsWith("#") }.contains(BuiltInRegistries.ITEM.getKey(item).asString())
+    }
+
+    enum class Type {
+        ITEM_USE,
+        INTERACT_WITH,
+        RECIPE,
+        DIMENSION,
+        BREAK_BLOCK;
+
+        companion object {
+            val CODEC = Codec.STRING.xmap(Type::valueOf, Type::name)
+        }
     }
 }
 

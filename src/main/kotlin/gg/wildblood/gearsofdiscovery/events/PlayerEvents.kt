@@ -2,8 +2,9 @@ package gg.wildblood.gearsofdiscovery.events
 
 import gg.wildblood.gearsofdiscovery.GearsOfDiscoveryMod
 import gg.wildblood.gearsofdiscovery.GearsOfDiscoveryMod.LOGGER
-import gg.wildblood.gearsofdiscovery.config.LockSavedData
 import gg.wildblood.gearsofdiscovery.locks.ModRegistries.LOCK_REGISTRY_KEY
+import gg.wildblood.gearsofdiscovery.network.ModClientPayloadHandler
+import gg.wildblood.gearsofdiscovery.network.UnlockList
 import net.minecraft.client.Minecraft
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.player.Player
@@ -39,18 +40,10 @@ object PlayerEvents {
 
     @SubscribeEvent
     fun onRightClickItemEvent(event: PlayerInteractEvent.RightClickItem) {
-        val data = LockSavedData.get(event.entity)
-
-        if(data != null) {
-            if(event.itemStack.item == Items.STICK) {
-                if(data.getLocks().contains("fish")) {
-                    data.removeLock("fish")
-                } else {
-                    data.addLock("fish")
-                }
-            }
+        when(event.itemStack.item) {
+            Items.STICK -> ModClientPayloadHandler.serverAddUnlock(event.entity,"fish")
+            Items.FISHING_ROD -> ModClientPayloadHandler.serverRemoveUnlock(event.entity,"fish")
         }
-
 
         cancelIfLocked(event)
     }
@@ -66,13 +59,11 @@ object PlayerEvents {
     }
 
     private fun <T> cancelIfLocked(event: T) where T : PlayerInteractEvent, T : ICancellableEvent {
-        event.isCanceled = event.itemStack.isLocked(event.entity)
+        event.isCanceled = event.itemStack.isLocked()
     }
 }
 
-fun ItemStack.isLocked(player: Player) : Boolean {
-    if(!player.isLocalPlayer) return false;
-
+fun ItemStack.isLocked() : Boolean {
     val registry = Minecraft.getInstance()
         .connection
         ?.registryAccess()
@@ -80,5 +71,9 @@ fun ItemStack.isLocked(player: Player) : Boolean {
         ?.getOrNull()
         ?: return false
 
-    return registry.any { it.isItemLocked(this, player) }
+    val isLocked = registry.any { it.isItemLocked(this) }
+
+    println("${this.item.getName(this)} ${if(isLocked) "is" else "is not"} locked!")
+
+    return isLocked
 }
