@@ -2,13 +2,9 @@ package gg.wildblood.gearsofdiscovery
 
 import com.mojang.logging.LogUtils
 import gg.wildblood.gearsofdiscovery.blocks.ModBlocks
-import gg.wildblood.gearsofdiscovery.datamaps.Lock
+import gg.wildblood.gearsofdiscovery.config.Config
 import gg.wildblood.gearsofdiscovery.items.ModItems
-import gg.wildblood.gearsofdiscovery.locks.ModRegistries.LOCK_REGISTRY_KEY
 import gg.wildblood.gearsofdiscovery.tabs.ModCreativeTabs
-import net.minecraft.core.RegistrySetBuilder
-import net.minecraft.core.registries.Registries
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature
 import net.neoforged.bus.api.SubscribeEvent
 import net.neoforged.fml.ModLoadingContext
 import net.neoforged.fml.common.EventBusSubscriber

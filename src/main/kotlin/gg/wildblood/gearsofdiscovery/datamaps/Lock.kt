@@ -2,11 +2,16 @@ package gg.wildblood.gearsofdiscovery.datamaps
 
 import com.mojang.serialization.Codec
 import com.mojang.serialization.codecs.RecordCodecBuilder
+import gg.wildblood.gearsofdiscovery.config.LockSavedData
+import net.minecraft.client.Minecraft
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.resources.ResourceLocation
+import net.minecraft.server.MinecraftServer
 import net.minecraft.tags.TagKey
+import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.level.Level
 import java.util.stream.Stream
 
 data class Lock(
@@ -26,12 +31,13 @@ data class Lock(
         }
     }
 
-    fun isItemLocked(itemStack: ItemStack) : Boolean {
-        return isLockEnabled().and(containsAny(itemStack.tags).xor(contains(itemStack.item)))
+    fun isItemLocked(itemStack: ItemStack, player: Player) : Boolean {
+        return isLockEnabled(player)?.and(containsAny(itemStack.tags).xor(contains(itemStack.item))) ?: false
     }
 
-    // TODO: Check if the World Contains the key of the lock - World Unlocked contains this ? if not true
-    private fun isLockEnabled(): Boolean = true
+    private fun isLockEnabled(player: Player): Boolean? {
+        return LockSavedData.get(player)?.getLocks()?.contains(name)
+    }
 
     /**
      * Checks if any of the tag keys in the provided stream match with the items in the list

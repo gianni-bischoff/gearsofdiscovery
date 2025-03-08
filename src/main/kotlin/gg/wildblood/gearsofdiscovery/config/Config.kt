@@ -1,5 +1,6 @@
-package gg.wildblood.gearsofdiscovery
+package gg.wildblood.gearsofdiscovery.config
 
+import gg.wildblood.gearsofdiscovery.GearsOfDiscoveryMod
 import net.neoforged.bus.api.SubscribeEvent
 import net.neoforged.fml.common.EventBusSubscriber
 import net.neoforged.fml.event.config.ModConfigEvent
