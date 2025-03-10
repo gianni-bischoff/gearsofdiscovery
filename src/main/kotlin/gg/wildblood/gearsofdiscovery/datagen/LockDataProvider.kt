@@ -11,10 +11,11 @@ import net.minecraft.data.DataProvider
 import net.minecraft.data.PackOutput
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.resources.ResourceKey
-import net.minecraft.tags.ItemTags
 import net.minecraft.tags.TagKey
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.Items
+import net.minecraft.world.level.block.Block
+import net.minecraft.world.level.block.Blocks
 import net.neoforged.neoforge.common.Tags
 import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider
 import net.neoforged.neoforge.common.data.ExistingFileHelper
@@ -37,13 +38,6 @@ class LockDataProvider(
         ))
 
         locks.add(Lock(
-            "nodirt",
-            "No dirt in my Hood.",
-            Lock.Type.ITEM_USE,
-            listOf(Items.DIRT.asString())
-        ))
-
-        locks.add(Lock(
             "disable_end",
             "Disable End.",
             Lock.Type.DIMENSION,
@@ -55,6 +49,13 @@ class LockDataProvider(
             "Disable End portal interaction.",
             Lock.Type.ITEM_USE,
             listOf(Items.ENDER_EYE.asString())
+        ))
+
+        locks.add(Lock(
+            "disable_mining_stone",
+            "No Stone for you.",
+            Lock.Type.INTERACT_WITH, // Problem when placing onto.
+            listOf(Blocks.STONE.asString())
         ))
 
         val registryBuilder = RegistrySetBuilder().add(LOCK_REGISTRY_KEY) { bootstrap ->
@@ -79,5 +80,6 @@ class LockDataProvider(
     override fun getName(): String = "Lock Datapack Registry Data Provider"
 }
 
+fun Block.asString(): String = BuiltInRegistries.BLOCK.getKey(this).asString()
 fun TagKey<Item>.asString(): String = "#${this.location.namespace}:${this.location.path}"
 fun Item.asString(): String = BuiltInRegistries.ITEM.getKey(this).asString()
