@@ -3,12 +3,8 @@ package gg.wildblood.gearsofdiscovery.datagen
 import gg.wildblood.gearsofdiscovery.GearsOfDiscoveryMod
 import gg.wildblood.gearsofdiscovery.datamaps.Lock
 import gg.wildblood.gearsofdiscovery.locks.ModRegistries.LOCK_REGISTRY_KEY
-import net.minecraft.core.HolderGetter
-import net.minecraft.core.RegistrySetBuilder
-import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceKey
 import net.minecraft.resources.ResourceLocation
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature
 import net.neoforged.bus.api.SubscribeEvent
 import net.neoforged.fml.common.EventBusSubscriber
 import net.neoforged.neoforge.data.event.GatherDataEvent

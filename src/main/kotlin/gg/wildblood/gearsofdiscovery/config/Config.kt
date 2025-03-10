@@ -33,7 +33,7 @@ object Config {
 
     @SubscribeEvent
     fun onLoad(event: ModConfigEvent) {
-        event.config.loadedConfig?.let { config ->
+        event.config.loadedConfig?.let {
             dimensionLock = DIMENSION_LOCK.get()
             itemUseLock = ITEM_USE_LOCK.get()
             craftLock = CRAFT_LOCK.get()

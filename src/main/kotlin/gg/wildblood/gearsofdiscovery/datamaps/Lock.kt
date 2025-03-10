@@ -62,7 +62,7 @@ data class Lock(
 
         companion object {
             fun from(displayName: String) = entries.firstOrNull() { it.displayName == displayName } ?: ITEM_USE
-            val CODEC = Codec.STRING.xmap(::from, Type::displayName)
+            val CODEC: Codec<Type> = Codec.STRING.xmap(::from, Type::displayName)
         }
     }
 }
