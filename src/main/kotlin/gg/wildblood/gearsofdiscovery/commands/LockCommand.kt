@@ -12,18 +12,25 @@ import net.minecraft.commands.Commands
 import net.minecraft.network.chat.ClickEvent
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.Style
+import net.neoforged.neoforge.client.event.CustomizeGuiOverlayEvent.Chat
 
 
 object LockCommand {
     fun register(dispatcher: CommandDispatcher<CommandSourceStack>) {
         dispatcher.register(
             Commands.literal("lock")
+                .executes { context -> listLocks(context); 0}
                 .requires { p -> p.hasPermission(4) }
                 .then(Commands.literal("list").executes { context -> listLocks(context); 0 })
                 .then(Commands.literal("toggle")
                         .then(Commands.argument("lock", StringArgumentType.word())
                             .executes { context -> toggleLock(context); 0 }
                         )
+                )
+                .then(Commands.literal("detail")
+                    .then(Commands.argument("lock", StringArgumentType.word())
+                        .executes { context -> lockDetail(context); 0 }
+                    )
                 )
         )
     }
@@ -37,7 +44,7 @@ object LockCommand {
             messageText.append(
                 Component.literal("\n- [${if(it.enabled) "✔" else "X"}] ${it.name}")
                     .withStyle(if(it.enabled) ChatFormatting.GREEN else ChatFormatting.RED)
-                    .withStyle(Style.EMPTY.withClickEvent(ClickEvent(ClickEvent.Action.RUN_COMMAND, "/lock toggle ${it.name}")))
+                    .withStyle(Style.EMPTY.withClickEvent(ClickEvent(ClickEvent.Action.RUN_COMMAND, "/lock detail ${it.name}")))
             )
         }
 
@@ -66,7 +73,39 @@ object LockCommand {
             ModClientPayloadHandler.serverRemoveUnlock(context.source.playerOrException, lock.name)
         }
 
-        context.source.sendSuccess({ Component.literal("Lock ${lock.name} ${if(lock.enabled) "disabled" else "enabled"}!") },false)
+        lockDetail(context)
+    }
+
+    private fun lockDetail(context: CommandContext<CommandSourceStack>) {
+        val lockName = context.getArgument("lock", String::class.java)
+
+        val lockRegistry = Minecraft.getInstance().tryGetLockRegistry() ?: return
+
+        val lock = lockRegistry.first { it.name == lockName }
+
+        if (lock == null) {
+            context.source.sendFailure(Component.literal("Lock $lockName not found!").withStyle(ChatFormatting.RED))
+            return
+        }
+
+        val message = Component.literal("").withStyle(ChatFormatting.GRAY)
+            .append(Component.literal("\nLock Info - $lockName\n").withStyle(ChatFormatting.BOLD).withStyle(ChatFormatting.UNDERLINE).withStyle(ChatFormatting.WHITE))
+            .append("\nDescription: ${lock.description}")
+            .append(Component.literal("\nEnabled: ${if(lock.enabled) "yes" else "no"} - "))
+            .append(Component.literal("Click to Toggle")
+                .withStyle(Style.EMPTY.withClickEvent(ClickEvent(ClickEvent.Action.RUN_COMMAND, "/lock toggle ${lock.name}")))
+                .withStyle(ChatFormatting.UNDERLINE))
+            .append("\n\nActions:")
+
+        lock.actions.forEach { (k, v) ->
+            message.append(Component.literal("\n─ ${k.displayName}:\n"))
+            v.forEach {
+                message.append(Component.literal(" └ $it"))
+            }
+        }
+
+        context.source.sendSuccess({ message },false)
+
 
     }
 }
