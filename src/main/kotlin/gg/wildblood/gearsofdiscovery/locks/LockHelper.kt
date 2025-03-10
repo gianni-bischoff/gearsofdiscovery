@@ -3,11 +3,16 @@ package gg.wildblood.gearsofdiscovery.locks
 import net.minecraft.client.Minecraft
 import net.minecraft.core.Registry
 import net.minecraft.core.registries.BuiltInRegistries
+import net.minecraft.core.registries.Registries
+import net.minecraft.resources.ResourceKey
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.tags.TagKey
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Block
+import net.neoforged.neoforge.registries.NeoForgeRegistries
+import java.awt.Dimension
 import java.util.stream.Stream
 import kotlin.jvm.optionals.getOrNull
 
@@ -20,6 +25,13 @@ fun ItemStack.hasTypeLock(type: Lock.Type) : Boolean {
                 this.tags.contains(it.substring(1)) || it == this.getKey().asString()
             } ?: false
         }
+}
+
+fun ResourceKey<Level>.hasTypeLock(type: Lock.Type) : Boolean {
+    val registry = Minecraft.getInstance().tryGetLockRegistry() ?: return false
+
+    return registry.locksWithType(type)
+        .any { lock -> lock.actions[type]?.contains(this.location().asString()) ?: false }
 }
 
 fun Block.hasTypeLock(type: Lock.Type): Boolean {

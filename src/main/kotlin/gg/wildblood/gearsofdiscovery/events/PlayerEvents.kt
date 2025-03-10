@@ -8,6 +8,8 @@ import net.minecraft.world.level.block.Block
 import net.neoforged.bus.api.ICancellableEvent
 import net.neoforged.bus.api.SubscribeEvent
 import net.neoforged.fml.common.EventBusSubscriber
+import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent
+import net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent
 
 @EventBusSubscriber(modid = GearsOfDiscoveryMod.MODID, bus = EventBusSubscriber.Bus.GAME)
@@ -30,6 +32,11 @@ object PlayerEvents {
     @SubscribeEvent
     fun onRightClickItemEvent(event: PlayerInteractEvent.RightClickItem) {
         event.isCanceled = event.itemStack.hasTypeLock(Lock.Type.ITEM_USE)
+    }
+
+    @SubscribeEvent
+    fun onEntityTravelToDimensionEvent(event: EntityTravelToDimensionEvent) {
+        event.isCanceled = event.dimension.hasTypeLock(Lock.Type.DIMENSION_TRAVEL)
     }
 
     private fun <T> getTargetBlock(event: T) : Block where T : PlayerInteractEvent, T : ICancellableEvent {

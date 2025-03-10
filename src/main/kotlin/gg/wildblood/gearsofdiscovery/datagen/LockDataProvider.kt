@@ -14,6 +14,7 @@ import net.minecraft.resources.ResourceKey
 import net.minecraft.tags.TagKey
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.Items
+import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
 import net.neoforged.neoforge.common.Tags
@@ -30,38 +31,50 @@ class LockDataProvider(
     override fun run(cache: CachedOutput): CompletableFuture<*> {
         val locks: MutableList<Lock> = mutableListOf()
 
-        locks.add(
-            Lock(
+        locks.add(Lock(
             "fish",
             "Locks all Fishes",
             mapOf(
                 Lock.Type.ITEM_USE
                         to listOf(Tags.Items.FOODS.asString())
             )
-        )
-        )
+        ))
 
-        locks.add(
-            Lock(
+        locks.add(Lock(
             "disable_eye_of_ender",
             "Disable End portal interaction.",
             mapOf(
                 Lock.Type.ITEM_USE
                         to listOf(Items.ENDER_EYE.asString())
             )
-        )
-        )
+        ))
 
-        locks.add(
-            Lock(
+        locks.add(Lock(
             "disable_mining_stone",
             "No Stone for you.",
             mapOf(
                 Lock.Type.BLOCK_BREAK
                         to listOf(Blocks.STONE.asString())
             )
-        )
-        )
+        ))
+
+        locks.add(Lock(
+            "disable_nether",
+            "The nether should be prohibited.",
+            mapOf(
+                Lock.Type.DIMENSION_TRAVEL
+                        to listOf(Level.NETHER.location().asString())
+            )
+        ))
+
+        locks.add(Lock(
+            "disable_end",
+            "The end should be prohibited.",
+            mapOf(
+                Lock.Type.DIMENSION_TRAVEL
+                        to listOf(Level.END.location().asString())
+            )
+        ))
 
         val registryBuilder = RegistrySetBuilder().add(LOCK_REGISTRY_KEY) { bootstrap ->
                 locks.forEach {

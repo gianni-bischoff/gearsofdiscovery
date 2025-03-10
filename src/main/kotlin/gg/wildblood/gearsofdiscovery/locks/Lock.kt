@@ -28,7 +28,8 @@ data class Lock(
         ITEM_USE("item:use"),
         ITEM_EQUIP("item:equip"),
         BLOCK_BREAK("block:break"),
-        BLOCK_INTERACT("block:interact");
+        BLOCK_INTERACT("block:interact"),
+        DIMENSION_TRAVEL("dimension:travel");
 
         companion object {
             fun from(displayName: String) = entries.firstOrNull() { it.displayName == displayName } ?: ITEM_USE
