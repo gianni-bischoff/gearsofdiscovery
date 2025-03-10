@@ -11,13 +11,9 @@ import net.minecraft.world.level.block.Block
 import java.util.stream.Stream
 import kotlin.jvm.optionals.getOrNull
 
-object LockHelper {
-}
-
 fun ItemStack.hasTypeLock(type: Lock.Type) : Boolean {
     val registry = Minecraft.getInstance().tryGetLockRegistry() ?: return false
 
-    // Blocked if in Type is the Tag or the name of the item | the tag is prefixed with # that needs to be removed before checking
     return registry.locksWithType(type)
         .any { lock ->
             lock.actions[type]?.any {
@@ -32,19 +28,11 @@ fun Block.hasTypeLock(type: Lock.Type): Boolean {
     return registry.locksWithType(type)
         .any { it.actions[type]?.contains(BuiltInRegistries.BLOCK.getKey(this).asString()) ?: false }
 }
-
 fun Block.hasTypeLock(vararg type: Lock.Type): Boolean {
     val registry = Minecraft.getInstance().tryGetLockRegistry() ?: return false
 
     return registry.locksWithType(*type)
         .any { lock -> lock.actions.filter { entry -> type.contains(entry.key) }.values.any { it.contains(BuiltInRegistries.BLOCK.getKey(this).asString()) } }
-}
-
-fun Block.isLocked() : Boolean {
-    val registry = Minecraft.getInstance().tryGetLockRegistry() ?: return false
-
-    return registry.locksWithType(Lock.Type.BLOCK_BREAK)
-        .any { it.actions[Lock.Type.BLOCK_BREAK]?.contains(BuiltInRegistries.BLOCK.getKey(this).asString()) ?: false }
 }
 
 fun Stream<out TagKey<out Item>>.contains(tagName: String) : Boolean = this.anyMatch { it.location.asString() == tagName }
