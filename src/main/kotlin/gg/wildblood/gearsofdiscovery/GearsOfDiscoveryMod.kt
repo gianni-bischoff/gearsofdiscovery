@@ -5,6 +5,7 @@ import gg.wildblood.gearsofdiscovery.blocks.ModBlocks
 import gg.wildblood.gearsofdiscovery.config.Config
 import gg.wildblood.gearsofdiscovery.items.ModItems
 import gg.wildblood.gearsofdiscovery.tabs.ModCreativeTabs
+import gg.wildblood.gearsofdiscovery.villagers.ModVillager
 import net.neoforged.bus.api.SubscribeEvent
 import net.neoforged.fml.ModLoadingContext
 import net.neoforged.fml.common.EventBusSubscriber
