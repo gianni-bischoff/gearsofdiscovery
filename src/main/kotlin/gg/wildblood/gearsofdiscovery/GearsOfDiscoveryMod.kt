@@ -27,6 +27,9 @@ object GearsOfDiscoveryMod {
         ModItems.REGISTRY.register(MOD_BUS)
         ModCreativeTabs.REGISTRY.register(MOD_BUS)
 
+        ModVillager.VILLAGER_PROFESSION.register(MOD_BUS)
+        ModVillager.POI_TYPES.register(MOD_BUS)
+
         val container = ModLoadingContext.get().activeContainer
 
         container.registerConfig(ModConfig.Type.SERVER, Config.SPEC)
