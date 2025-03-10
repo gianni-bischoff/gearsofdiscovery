@@ -35,8 +35,7 @@ class LockDataProvider(
             "fish",
             "Locks all Fishes",
             mapOf(
-                Lock.Type.ITEM_USE
-                        to listOf(Tags.Items.FOODS.asString())
+                Lock.Type.ITEM_USE to listOf(Tags.Items.FOODS.asString())
             )
         ))
 
@@ -44,8 +43,7 @@ class LockDataProvider(
             "disable_eye_of_ender",
             "Disable End portal interaction.",
             mapOf(
-                Lock.Type.ITEM_USE
-                        to listOf(Items.ENDER_EYE.asString())
+                Lock.Type.ITEM_USE to listOf(Items.ENDER_EYE.asString())
             )
         ))
 
@@ -53,8 +51,7 @@ class LockDataProvider(
             "disable_mining_stone",
             "No Stone for you.",
             mapOf(
-                Lock.Type.BLOCK_BREAK
-                        to listOf(Blocks.STONE.asString())
+                Lock.Type.BLOCK_BREAK to listOf(Blocks.STONE.asString())
             )
         ))
 
@@ -62,8 +59,7 @@ class LockDataProvider(
             "disable_nether",
             "The nether should be prohibited.",
             mapOf(
-                Lock.Type.DIMENSION_TRAVEL
-                        to listOf(Level.NETHER.location().asString())
+                Lock.Type.DIMENSION_TRAVEL to listOf(Level.NETHER.location().asString())
             )
         ))
 
@@ -71,8 +67,7 @@ class LockDataProvider(
             "disable_end",
             "The end should be prohibited.",
             mapOf(
-                Lock.Type.DIMENSION_TRAVEL
-                        to listOf(Level.END.location().asString())
+                Lock.Type.DIMENSION_TRAVEL to listOf(Level.END.location().asString())
             )
         ))
 
