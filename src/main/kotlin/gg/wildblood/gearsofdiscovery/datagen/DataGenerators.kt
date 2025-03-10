@@ -1,7 +1,7 @@
 package gg.wildblood.gearsofdiscovery.datagen
 
 import gg.wildblood.gearsofdiscovery.GearsOfDiscoveryMod
-import gg.wildblood.gearsofdiscovery.datamaps.Lock
+import gg.wildblood.gearsofdiscovery.locks.Lock
 import gg.wildblood.gearsofdiscovery.locks.ModRegistries.LOCK_REGISTRY_KEY
 import net.minecraft.resources.ResourceKey
 import net.minecraft.resources.ResourceLocation

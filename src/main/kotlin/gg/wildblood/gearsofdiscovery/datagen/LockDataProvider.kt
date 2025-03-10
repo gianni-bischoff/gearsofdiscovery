@@ -1,8 +1,8 @@
 package gg.wildblood.gearsofdiscovery.datagen
 
 import gg.wildblood.gearsofdiscovery.GearsOfDiscoveryMod
-import gg.wildblood.gearsofdiscovery.datamaps.Lock
-import gg.wildblood.gearsofdiscovery.datamaps.asString
+import gg.wildblood.gearsofdiscovery.locks.Lock
+import gg.wildblood.gearsofdiscovery.locks.asString
 import gg.wildblood.gearsofdiscovery.locks.ModRegistries.LOCK_REGISTRY_KEY
 import net.minecraft.core.RegistrySetBuilder
 import net.minecraft.core.registries.BuiltInRegistries
@@ -30,33 +30,38 @@ class LockDataProvider(
     override fun run(cache: CachedOutput): CompletableFuture<*> {
         val locks: MutableList<Lock> = mutableListOf()
 
-        locks.add(Lock(
+        locks.add(
+            Lock(
             "fish",
             "Locks all Fishes",
-            Lock.Type.ITEM_USE,
-            listOf(Tags.Items.FOODS.asString())
-        ))
+            mapOf(
+                Lock.Type.ITEM_USE
+                        to listOf(Tags.Items.FOODS.asString())
+            )
+        )
+        )
 
-        locks.add(Lock(
-            "disable_end",
-            "Disable End.",
-            Lock.Type.DIMENSION,
-            listOf("minecraft:the_end")
-        ))
-
-        locks.add(Lock(
+        locks.add(
+            Lock(
             "disable_eye_of_ender",
             "Disable End portal interaction.",
-            Lock.Type.ITEM_USE,
-            listOf(Items.ENDER_EYE.asString())
-        ))
+            mapOf(
+                Lock.Type.ITEM_USE
+                        to listOf(Items.ENDER_EYE.asString())
+            )
+        )
+        )
 
-        locks.add(Lock(
+        locks.add(
+            Lock(
             "disable_mining_stone",
             "No Stone for you.",
-            Lock.Type.INTERACT_WITH, // Problem when placing onto.
-            listOf(Blocks.STONE.asString())
-        ))
+            mapOf(
+                Lock.Type.BLOCK_BREAK
+                        to listOf(Blocks.STONE.asString())
+            )
+        )
+        )
 
         val registryBuilder = RegistrySetBuilder().add(LOCK_REGISTRY_KEY) { bootstrap ->
                 locks.forEach {

@@ -3,7 +3,7 @@ package gg.wildblood.gearsofdiscovery.commands
 import com.mojang.brigadier.CommandDispatcher
 import com.mojang.brigadier.arguments.StringArgumentType
 import com.mojang.brigadier.context.CommandContext
-import gg.wildblood.gearsofdiscovery.locks.ModRegistries.LOCK_REGISTRY_KEY
+import gg.wildblood.gearsofdiscovery.locks.tryGetLockRegistry
 import gg.wildblood.gearsofdiscovery.network.ModClientPayloadHandler
 import net.minecraft.ChatFormatting
 import net.minecraft.client.Minecraft
@@ -12,7 +12,6 @@ import net.minecraft.commands.Commands
 import net.minecraft.network.chat.ClickEvent
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.Style
-import kotlin.jvm.optionals.getOrNull
 
 
 object LockCommand {
@@ -34,7 +33,7 @@ object LockCommand {
 
         val messageText = Component.literal("Loaded Locks:")
 
-        lockRegistry.sortedBy { it.type }.forEach {
+        lockRegistry.forEach {
             messageText.append(
                 Component.literal("\n- [${if(it.enabled) "✔" else "X"}] ${it.name}")
                     .withStyle(if(it.enabled) ChatFormatting.GREEN else ChatFormatting.RED)
@@ -72,4 +71,3 @@ object LockCommand {
     }
 }
 
-fun Minecraft.tryGetLockRegistry() = connection?.registryAccess()?.registry(LOCK_REGISTRY_KEY)?.getOrNull()
