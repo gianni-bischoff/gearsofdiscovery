@@ -14,14 +14,6 @@ import kotlin.jvm.optionals.getOrNull
 object LockHelper {
 }
 
-fun ItemStack.isLocked() : Boolean {
-    val registry = Minecraft.getInstance().tryGetLockRegistry() ?: return false
-
-    val isLocked = registry.locksWithType(Lock.Type.ITEM_USE).any { it.isItemLocked(this) }
-
-    return isLocked
-}
-
 fun ItemStack.hasTypeLock(type: Lock.Type) : Boolean {
     val registry = Minecraft.getInstance().tryGetLockRegistry() ?: return false
 

@@ -24,32 +24,6 @@ data class Lock(
         }
     }
 
-    fun isItemLocked(itemStack: ItemStack) : Boolean {
-        return enabled.and(containsAny(itemStack.tags).xor(contains(itemStack.item)))
-    }
-
-    /**
-     * Checks if any of the tag keys in the provided stream match with the items in the list
-     * that start with the "#" character.
-     *
-     * @param tags A stream of TagKey<Item> objects to be matched against the items list.
-     */
-    private fun containsAny(tags: Stream<TagKey<Item>>) : Boolean {
-        return this.actions[Type.ITEM_USE]?.filter { it.startsWith("#") }?.any { tagName -> tags.anyMatch { tag -> tag.location.asString() == tagName.substring(1) } }
-            ?: false
-    }
-
-    /**
-     * Checks whether the specified item exists in the list of items that do not start with the "#" character.
-     *
-     * @param item The item to check for existence in the list.
-     * @return True if the item exists in the list, otherwise false.
-     */
-    private fun contains(item: Item) : Boolean {
-        return this.actions[Type.ITEM_USE]?.filter { !it.startsWith("#") }
-            ?.contains(BuiltInRegistries.ITEM.getKey(item).asString()) ?: false
-    }
-
     enum class Type(val displayName: String) {
         ITEM_USE("item:use"),
         ITEM_EQUIP("item:equip"),

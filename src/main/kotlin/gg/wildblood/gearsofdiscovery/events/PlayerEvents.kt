@@ -4,7 +4,6 @@ import gg.wildblood.gearsofdiscovery.GearsOfDiscoveryMod
 import gg.wildblood.gearsofdiscovery.GearsOfDiscoveryMod.LOGGER
 import gg.wildblood.gearsofdiscovery.locks.Lock
 import gg.wildblood.gearsofdiscovery.locks.hasTypeLock
-import gg.wildblood.gearsofdiscovery.locks.isLocked
 import net.minecraft.world.level.block.Block
 import net.neoforged.bus.api.ICancellableEvent
 import net.neoforged.bus.api.SubscribeEvent
