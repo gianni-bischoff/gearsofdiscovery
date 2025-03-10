@@ -21,7 +21,7 @@ object ModNetwork {
         registrar.playToClient(
             UnlockList.TYPE,
             UnlockList.STREAM_CODEC,
-            ModClientPayloadHandler::handleDataOnNetwork
+            ModClientPayloadHandler::syncUnlockList
         )
     }
 }
@@ -72,7 +72,7 @@ object ModClientPayloadHandler {
     }
 
 
-    fun handleDataOnNetwork(unlockList: UnlockList, context: IPayloadContext) {
+    fun syncUnlockList(unlockList: UnlockList, context: IPayloadContext) {
         println("${context.player().name} has Packet received.")
         context.enqueueWork {
             val registry = Minecraft.getInstance() // Perfect example of full trust Programming.
