@@ -1,6 +1,7 @@
 package gg.wildblood.gearsofdiscovery.tabs
 
 import gg.wildblood.gearsofdiscovery.GearsOfDiscoveryMod
+import gg.wildblood.gearsofdiscovery.blocks.ModBlocks
 import gg.wildblood.gearsofdiscovery.items.ModItems
 import net.minecraft.core.registries.Registries
 import net.minecraft.network.chat.Component
@@ -23,6 +24,7 @@ object ModCreativeTabs {
             .displayItems { _: ItemDisplayParameters?, output: CreativeModeTab.Output ->
                 output.accept(Items.CLOCK)
                 output.accept(ModItems.SMALL_ENGINEERING_BUNDLE)
+                output.accept(ModBlocks.PILLOW_ITEM)
             }.build()
     }
 }

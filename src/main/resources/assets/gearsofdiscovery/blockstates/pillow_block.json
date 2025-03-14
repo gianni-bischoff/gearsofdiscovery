@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "gearsofdiscovery:block/pillow_block",
+      "y": 270
+    },
+    "facing=south": {
+      "model": "gearsofdiscovery:block/pillow_block",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "gearsofdiscovery:block/pillow_block",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "gearsofdiscovery:block/pillow_block"
+    }
+  }
+}
