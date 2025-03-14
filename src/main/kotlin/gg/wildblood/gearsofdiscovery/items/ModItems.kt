@@ -16,4 +16,8 @@ object ModItems {
                 .alwaysEdible().nutrition(1).saturationModifier(2f).build()
         ))
     }
+
+    val OTOMATON: OtomatonWeapon by REGISTRY.register("otomaton") { ->
+        OtomatonWeapon(Item.Properties())
+    }
 }
