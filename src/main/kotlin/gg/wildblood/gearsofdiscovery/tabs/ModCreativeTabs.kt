@@ -25,6 +25,7 @@ object ModCreativeTabs {
                 output.accept(Items.CLOCK)
                 output.accept(ModItems.SMALL_ENGINEERING_BUNDLE)
                 output.accept(ModBlocks.PILLOW_ITEM)
+                output.accept(ModItems.OTOMATON)
             }.build()
     }
 }
