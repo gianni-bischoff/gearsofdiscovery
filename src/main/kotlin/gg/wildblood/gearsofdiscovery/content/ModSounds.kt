@@ -1,9 +1,8 @@
-package gg.wildblood.gearsofdiscovery.sounds
+package gg.wildblood.gearsofdiscovery.content
 
 import gg.wildblood.gearsofdiscovery.GearsOfDiscoveryMod
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.sounds.SoundEvent
-import net.neoforged.neoforge.common.util.DeferredSoundType
 import net.neoforged.neoforge.registries.DeferredRegister
 
 object ModSounds {

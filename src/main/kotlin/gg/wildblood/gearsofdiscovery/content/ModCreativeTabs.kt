@@ -1,8 +1,6 @@
-package gg.wildblood.gearsofdiscovery.tabs
+package gg.wildblood.gearsofdiscovery.content
 
 import gg.wildblood.gearsofdiscovery.GearsOfDiscoveryMod
-import gg.wildblood.gearsofdiscovery.blocks.ModBlocks
-import gg.wildblood.gearsofdiscovery.items.ModItems
 import net.minecraft.core.registries.Registries
 import net.minecraft.network.chat.Component
 import net.minecraft.world.item.CreativeModeTab

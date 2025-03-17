@@ -1,4 +1,4 @@
-package gg.wildblood.gearsofdiscovery.blocks
+package gg.wildblood.gearsofdiscovery.content.blocks
 
 import com.mojang.serialization.MapCodec
 import com.mojang.serialization.codecs.RecordCodecBuilder

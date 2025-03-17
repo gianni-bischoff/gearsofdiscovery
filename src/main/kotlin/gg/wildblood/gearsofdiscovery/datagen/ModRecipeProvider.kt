@@ -1,6 +1,6 @@
 package gg.wildblood.gearsofdiscovery.datagen
 
-import gg.wildblood.gearsofdiscovery.items.ModItems
+import gg.wildblood.gearsofdiscovery.content.ModItems
 import net.minecraft.core.HolderLookup
 import net.minecraft.data.PackOutput
 import net.minecraft.data.recipes.RecipeCategory

@@ -2,13 +2,16 @@
   "required": true,
   "minVersion": "0.8",
   "package": "gg.wildblood.gearsofdiscovery.mixin",
-  "compatibilityLevel": "JAVA_17",
+  "compatibilityLevel": "JAVA_21",
+  "refmap": "gearsofdiscovery.refmap.json",
   "mixins": [
-    "ExampleServerMixin"
+    "ClientTooltipComponentMixin",
+    "ItemStackMixin"
   ],
   "server": [],
   "client": [],
   "injectors": {
     "defaultRequire": 1
-  }
+  },
+  "verbose": true
 }

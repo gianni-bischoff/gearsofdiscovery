@@ -1,4 +1,4 @@
-package gg.wildblood.gearsofdiscovery.villagers
+package gg.wildblood.gearsofdiscovery.content
 
 import gg.wildblood.gearsofdiscovery.GearsOfDiscoveryMod
 import net.minecraft.core.registries.BuiltInRegistries

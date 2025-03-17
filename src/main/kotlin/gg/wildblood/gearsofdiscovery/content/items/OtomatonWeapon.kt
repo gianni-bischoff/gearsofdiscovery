@@ -1,11 +1,10 @@
-package gg.wildblood.gearsofdiscovery.items
+package gg.wildblood.gearsofdiscovery.content.items
 
 import gg.wildblood.gearsofdiscovery.GearsOfDiscoveryMod
-import gg.wildblood.gearsofdiscovery.sounds.ModSounds
+import gg.wildblood.gearsofdiscovery.content.ModSounds
 import net.minecraft.core.Holder
 import net.minecraft.core.component.DataComponents
 import net.minecraft.sounds.SoundEvent
-import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
 import net.minecraft.tags.EntityTypeTags
 import net.minecraft.util.Mth
