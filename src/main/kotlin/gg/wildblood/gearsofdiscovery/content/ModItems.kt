@@ -23,13 +23,6 @@ object ModItems {
         ))
     }
 
-    val MINERS_BACKPACK: Item by REGISTRY.register("miners_backpack") { ->
-        BackpackItem(Item.Properties().rarity(Rarity.COMMON).stacksTo(1).component(
-            ModItemDataComponents.BACKPACK_COMPONENT,
-            BackpackContent.EMPTY
-        ))
-    }
-
     val OTOMATON: OtomatonWeapon by REGISTRY.register("otomaton") { ->
         OtomatonWeapon(Item.Properties())
     }
