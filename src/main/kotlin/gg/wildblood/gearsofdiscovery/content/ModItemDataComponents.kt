@@ -1,4 +1,4 @@
-package gg.wildblood.gearsofdiscovery.content.items.components
+package gg.wildblood.gearsofdiscovery.content
 
 import gg.wildblood.gearsofdiscovery.GearsOfDiscoveryMod
 import net.minecraft.core.registries.Registries

@@ -3,7 +3,7 @@ package gg.wildblood.gearsofdiscovery
 import com.mojang.logging.LogUtils
 import gg.wildblood.gearsofdiscovery.config.Config
 import gg.wildblood.gearsofdiscovery.content.*
-import gg.wildblood.gearsofdiscovery.content.items.components.ModItemDataComponents
+import gg.wildblood.gearsofdiscovery.content.ModItemDataComponents
 import net.neoforged.bus.api.SubscribeEvent
 import net.neoforged.fml.ModLoadingContext
 import net.neoforged.fml.common.EventBusSubscriber
@@ -32,6 +32,7 @@ object GearsOfDiscoveryMod {
 
         ModItemDataComponents.REGISTRY.register(MOD_BUS)
         ModMenuTypes.REGISTRY.register(MOD_BUS)
+        ModDataAttachments.ATTACHMENT_TYPE.register(MOD_BUS)
 
         val container = ModLoadingContext.get().activeContainer
 

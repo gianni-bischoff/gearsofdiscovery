@@ -4,10 +4,7 @@
   "package": "gg.wildblood.gearsofdiscovery.mixin",
   "compatibilityLevel": "JAVA_21",
   "refmap": "gearsofdiscovery.refmap.json",
-  "mixins": [
-    "ClientTooltipComponentMixin",
-    "ItemStackMixin"
-  ],
+  "mixins": [],
   "server": [],
   "client": [],
   "injectors": {

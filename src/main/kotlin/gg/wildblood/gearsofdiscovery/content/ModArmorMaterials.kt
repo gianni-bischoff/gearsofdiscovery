@@ -16,19 +16,6 @@ import java.util.*
 import java.util.function.Supplier
 
 object ModArmorMaterials {
-    val MINER_ARMOR_TYPE: Holder<ArmorMaterial> = register(
-        "miner_armor",
-        EnumMap(mapOf(
-            ArmorItem.Type.BOOTS to 1,
-            ArmorItem.Type.LEGGINGS to 2,
-            ArmorItem.Type.CHESTPLATE to 3,
-            ArmorItem.Type.HELMET to 1
-        )),
-        15, 0.0f, 0.0f
-    ) { ModItems.MINERS_BACKPACK }
-
-
-
     fun register(
         name: String,
         typeProtection: EnumMap<ArmorItem.Type, Int>,
