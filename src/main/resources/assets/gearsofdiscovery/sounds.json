@@ -33,5 +33,10 @@
     "sounds": [
       "gearsofdiscovery:otomaton6"
     ]
+  },
+  "otomaton_cry": {
+    "sounds": [
+      "gearsofdiscovery:otomaton_cry"
+    ]
   }
 }

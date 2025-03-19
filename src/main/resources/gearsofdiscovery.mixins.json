@@ -4,7 +4,9 @@
   "package": "gg.wildblood.gearsofdiscovery.mixin",
   "compatibilityLevel": "JAVA_21",
   "refmap": "gearsofdiscovery.refmap.json",
-  "mixins": [],
+  "mixins": [
+    "TryUseTotemMixin"
+  ],
   "server": [],
   "client": [],
   "injectors": {

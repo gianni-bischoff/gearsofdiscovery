@@ -17,4 +17,6 @@ object ModSounds {
     val OTOMATON_NOTE_5 = SOUND_EVENTS.register("otomaton_note_5", SoundEvent::createVariableRangeEvent)
     val OTOMATON_NOTE_6 = SOUND_EVENTS.register("otomaton_note_6", SoundEvent::createVariableRangeEvent)
 
+    val OTOMATON_CRY = SOUND_EVENTS.register("otomaton_cry", SoundEvent::createVariableRangeEvent)
+
 }
