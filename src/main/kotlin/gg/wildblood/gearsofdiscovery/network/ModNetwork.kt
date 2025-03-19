@@ -2,7 +2,7 @@ package gg.wildblood.gearsofdiscovery.network
 
 import gg.wildblood.gearsofdiscovery.GearsOfDiscoveryMod
 import gg.wildblood.gearsofdiscovery.config.BaseSaveData
-import gg.wildblood.gearsofdiscovery.locks.ModRegistries.LOCK_REGISTRY_KEY
+import gg.wildblood.gearsofdiscovery.content.ModRegistries.LOCK_REGISTRY_KEY
 import net.minecraft.client.Minecraft
 import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.player.Player

@@ -1,9 +1,9 @@
-package gg.wildblood.gearsofdiscovery.commands
+package gg.wildblood.gearsofdiscovery.content.commands
 
 import com.mojang.brigadier.CommandDispatcher
 import com.mojang.brigadier.arguments.StringArgumentType
 import com.mojang.brigadier.context.CommandContext
-import gg.wildblood.gearsofdiscovery.locks.tryGetLockRegistry
+import gg.wildblood.gearsofdiscovery.utility.extensions.tryGetLockRegistry
 import gg.wildblood.gearsofdiscovery.network.ModClientPayloadHandler
 import net.minecraft.ChatFormatting
 import net.minecraft.client.Minecraft
@@ -12,7 +12,6 @@ import net.minecraft.commands.Commands
 import net.minecraft.network.chat.ClickEvent
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.Style
-import net.neoforged.neoforge.client.event.CustomizeGuiOverlayEvent.Chat
 
 
 object LockCommand {

@@ -1,12 +1,7 @@
-package gg.wildblood.gearsofdiscovery.locks
+package gg.wildblood.gearsofdiscovery.content.registry
 
 import com.mojang.serialization.Codec
 import com.mojang.serialization.codecs.RecordCodecBuilder
-import net.minecraft.core.registries.BuiltInRegistries
-import net.minecraft.tags.TagKey
-import net.minecraft.world.item.Item
-import net.minecraft.world.item.ItemStack
-import java.util.stream.Stream
 
 data class Lock(
     val name: String,

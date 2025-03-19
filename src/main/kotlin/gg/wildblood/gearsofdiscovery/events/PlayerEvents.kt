@@ -2,18 +2,13 @@ package gg.wildblood.gearsofdiscovery.events
 
 import gg.wildblood.gearsofdiscovery.GearsOfDiscoveryMod
 import gg.wildblood.gearsofdiscovery.GearsOfDiscoveryMod.LOGGER
-import gg.wildblood.gearsofdiscovery.locks.Lock
-import gg.wildblood.gearsofdiscovery.locks.hasTypeLock
-import net.minecraft.ChatFormatting
-import net.minecraft.client.Minecraft
-import net.minecraft.network.chat.ChatType
-import net.minecraft.network.chat.Component
+import gg.wildblood.gearsofdiscovery.content.registry.Lock
+import gg.wildblood.gearsofdiscovery.utility.extensions.hasTypeLock
 import net.minecraft.world.level.block.Block
 import net.neoforged.bus.api.ICancellableEvent
 import net.neoforged.bus.api.SubscribeEvent
 import net.neoforged.fml.common.EventBusSubscriber
 import net.neoforged.neoforge.client.event.ClientChatReceivedEvent
-import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent
 import net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent
 

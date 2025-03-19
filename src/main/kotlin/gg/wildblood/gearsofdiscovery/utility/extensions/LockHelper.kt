@@ -1,9 +1,10 @@
-package gg.wildblood.gearsofdiscovery.locks
+package gg.wildblood.gearsofdiscovery.utility.extensions
 
+import gg.wildblood.gearsofdiscovery.content.ModRegistries
+import gg.wildblood.gearsofdiscovery.content.registry.Lock
 import net.minecraft.client.Minecraft
 import net.minecraft.core.Registry
 import net.minecraft.core.registries.BuiltInRegistries
-import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceKey
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.tags.TagKey
@@ -11,8 +12,6 @@ import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Block
-import net.neoforged.neoforge.registries.NeoForgeRegistries
-import java.awt.Dimension
 import java.util.stream.Stream
 import kotlin.jvm.optionals.getOrNull
 

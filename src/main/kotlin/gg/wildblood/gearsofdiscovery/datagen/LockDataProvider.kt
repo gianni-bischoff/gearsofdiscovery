@@ -1,9 +1,9 @@
 package gg.wildblood.gearsofdiscovery.datagen
 
 import gg.wildblood.gearsofdiscovery.GearsOfDiscoveryMod
-import gg.wildblood.gearsofdiscovery.locks.Lock
-import gg.wildblood.gearsofdiscovery.locks.asString
-import gg.wildblood.gearsofdiscovery.locks.ModRegistries.LOCK_REGISTRY_KEY
+import gg.wildblood.gearsofdiscovery.content.registry.Lock
+import gg.wildblood.gearsofdiscovery.utility.extensions.asString
+import gg.wildblood.gearsofdiscovery.content.ModRegistries.LOCK_REGISTRY_KEY
 import net.minecraft.core.RegistrySetBuilder
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.data.CachedOutput
@@ -31,45 +31,55 @@ class LockDataProvider(
     override fun run(cache: CachedOutput): CompletableFuture<*> {
         val locks: MutableList<Lock> = mutableListOf()
 
-        locks.add(Lock(
+        locks.add(
+            Lock(
             "fish",
             "Locks all Fishes",
             mapOf(
                 Lock.Type.ITEM_USE to listOf(Tags.Items.FOODS.asString())
             )
-        ))
+        )
+        )
 
-        locks.add(Lock(
+        locks.add(
+            Lock(
             "disable_eye_of_ender",
             "Disable End portal interaction.",
             mapOf(
                 Lock.Type.ITEM_USE to listOf(Items.ENDER_EYE.asString())
             )
-        ))
+        )
+        )
 
-        locks.add(Lock(
+        locks.add(
+            Lock(
             "disable_mining_stone",
             "No Stone for you.",
             mapOf(
                 Lock.Type.BLOCK_BREAK to listOf(Blocks.STONE.asString())
             )
-        ))
+        )
+        )
 
-        locks.add(Lock(
+        locks.add(
+            Lock(
             "disable_nether",
             "The nether should be prohibited.",
             mapOf(
                 Lock.Type.DIMENSION_TRAVEL to listOf(Level.NETHER.location().asString())
             )
-        ))
+        )
+        )
 
-        locks.add(Lock(
+        locks.add(
+            Lock(
             "disable_end",
             "The end should be prohibited.",
             mapOf(
                 Lock.Type.DIMENSION_TRAVEL to listOf(Level.END.location().asString())
             )
-        ))
+        )
+        )
 
         val registryBuilder = RegistrySetBuilder().add(LOCK_REGISTRY_KEY) { bootstrap ->
                 locks.forEach {
