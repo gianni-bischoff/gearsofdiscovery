@@ -3,5 +3,35 @@
     "sounds": [
       "gearsofdiscovery:otomaton_squeal"
     ]
+  },
+  "otomaton_note_1": {
+    "sounds": [
+      "gearsofdiscovery:otomaton1"
+    ]
+  },
+  "otomaton_note_2": {
+    "sounds": [
+      "gearsofdiscovery:otomaton2"
+    ]
+  },
+  "otomaton_note_3": {
+    "sounds": [
+      "gearsofdiscovery:otomaton3"
+    ]
+  },
+  "otomaton_note_4": {
+    "sounds": [
+      "gearsofdiscovery:otomaton4"
+    ]
+  },
+  "otomaton_note_5": {
+    "sounds": [
+      "gearsofdiscovery:otomaton5"
+    ]
+  },
+  "otomaton_note_6": {
+    "sounds": [
+      "gearsofdiscovery:otomaton6"
+    ]
   }
 }

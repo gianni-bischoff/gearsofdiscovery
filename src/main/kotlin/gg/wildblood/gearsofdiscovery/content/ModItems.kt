@@ -1,15 +1,9 @@
 package gg.wildblood.gearsofdiscovery.content
 
 import gg.wildblood.gearsofdiscovery.GearsOfDiscoveryMod
-import gg.wildblood.gearsofdiscovery.content.items.BackpackItem
-import gg.wildblood.gearsofdiscovery.content.items.OtomatonWeapon
-import gg.wildblood.gearsofdiscovery.content.items.components.BackpackContent
-import gg.wildblood.gearsofdiscovery.content.items.components.ModItemDataComponents
-import net.minecraft.core.component.DataComponents
+import gg.wildblood.gearsofdiscovery.content.items.Otomaton
 import net.minecraft.world.food.FoodProperties
 import net.minecraft.world.item.Item
-import net.minecraft.world.item.Rarity
-import net.minecraft.world.item.component.BundleContents
 import net.neoforged.neoforge.registries.DeferredRegister
 import thedarkcolour.kotlinforforge.neoforge.forge.getValue
 
@@ -23,7 +17,7 @@ object ModItems {
         ))
     }
 
-    val OTOMATON: OtomatonWeapon by REGISTRY.register("otomaton") { ->
-        OtomatonWeapon(Item.Properties())
+    val OTOMATON: Otomaton by REGISTRY.register("otomaton") { ->
+        Otomaton(Item.Properties())
     }
 }
