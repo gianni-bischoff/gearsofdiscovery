@@ -1,6 +1,8 @@
 package gg.wildblood.gearsofdiscovery.content.items
 
+import gg.wildblood.gearsofdiscovery.GearsOfDiscoveryMod
 import gg.wildblood.gearsofdiscovery.content.ModSounds
+import net.minecraft.network.chat.Component
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundSource
 import net.minecraft.world.InteractionHand
@@ -8,6 +10,7 @@ import net.minecraft.world.InteractionResultHolder
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.Level
 
 class Otomaton(private val props: Properties) : Item(props) {
@@ -34,5 +37,15 @@ class Otomaton(private val props: Properties) : Item(props) {
 
     private fun getTone(): SoundEvent {
         return OTOMATON_TONES.random().get()
+    }
+
+    override fun appendHoverText(
+        stack: ItemStack,
+        context: TooltipContext,
+        tooltipComponents: MutableList<Component>,
+        tooltipFlag: TooltipFlag
+    ) {
+        tooltipComponents.add(Component.translatable("item.${GearsOfDiscoveryMod.MODID}.otomaton.tooltip"))
+        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag)
     }
 }

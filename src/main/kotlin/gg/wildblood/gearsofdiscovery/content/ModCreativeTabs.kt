@@ -22,6 +22,7 @@ object ModCreativeTabs {
                 output.accept(ModBlocks.PILLOW_ITEM)
                 output.accept(ModItems.OTOMATON)
                 output.accept(ModItems.HYPERSPEED_TOTEM)
+                output.accept(ModItems.WETZEL_PRETZEL)
             }.build()
     }
 }
