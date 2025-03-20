@@ -15,7 +15,7 @@ object ModItems {
     val REGISTRY: DeferredRegister.Items = DeferredRegister.createItems(GearsOfDiscoveryMod.MODID)
 
     val OTOMATON: Otomaton by REGISTRY.register("otomaton") { ->
-        Otomaton(Item.Properties())
+        Otomaton(Item.Properties().rarity(Rarity.EPIC))
     }
 
     val WETZEL_PRETZEL: Item by REGISTRY.register("wetzelpretzel") { ->
@@ -24,8 +24,16 @@ object ModItems {
                 .nutrition(6)
                 .saturationModifier(6.0f)
                 .build()
-            ).rarity(Rarity.EPIC)
+            ).rarity(Rarity.RARE)
         ).withTooltip(Component.translatable("item.${GearsOfDiscoveryMod.MODID}.wetzelpretzel.tooltip"))
+    }
+
+    val SALT: Item by REGISTRY.register("salt") { ->
+        Item(Item.Properties().rarity(Rarity.UNCOMMON))
+    }
+
+    val SALTED_DOUGH: Item by REGISTRY.register("salted_dough") { ->
+        BasicTooltipItem(Item.Properties()).withTooltip(Component.translatable("item.${GearsOfDiscoveryMod.MODID}.salted_dough.tooltip"))
     }
 
     val HYPERSPEED_TOTEM: HyperSpeedTotem by REGISTRY.register("hyperspeed_totem") { ->
