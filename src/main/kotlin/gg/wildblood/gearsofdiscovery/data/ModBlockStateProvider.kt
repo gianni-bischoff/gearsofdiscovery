@@ -1,4 +1,4 @@
-package gg.wildblood.gearsofdiscovery.datagen
+package gg.wildblood.gearsofdiscovery.data
 
 import gg.wildblood.gearsofdiscovery.GearsOfDiscoveryMod
 import net.minecraft.data.PackOutput
