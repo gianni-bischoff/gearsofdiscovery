@@ -1,11 +1,9 @@
 package gg.wildblood.gearsofdiscovery
 
 import com.mojang.logging.LogUtils
-import gg.wildblood.gearsofdiscovery.blocks.ModBlocks
 import gg.wildblood.gearsofdiscovery.config.Config
-import gg.wildblood.gearsofdiscovery.items.ModItems
-import gg.wildblood.gearsofdiscovery.tabs.ModCreativeTabs
-import gg.wildblood.gearsofdiscovery.villagers.ModVillager
+import gg.wildblood.gearsofdiscovery.content.*
+import gg.wildblood.gearsofdiscovery.content.ModItemDataComponents
 import net.neoforged.bus.api.SubscribeEvent
 import net.neoforged.fml.ModLoadingContext
 import net.neoforged.fml.common.EventBusSubscriber
@@ -30,6 +28,11 @@ object GearsOfDiscoveryMod {
 
         ModVillager.VILLAGER_PROFESSION.register(MOD_BUS)
         ModVillager.POI_TYPES.register(MOD_BUS)
+        ModSounds.SOUND_EVENTS.register(MOD_BUS)
+
+        ModItemDataComponents.REGISTRY.register(MOD_BUS)
+        ModMenuTypes.REGISTRY.register(MOD_BUS)
+        ModDataAttachments.ATTACHMENT_TYPE.register(MOD_BUS)
 
         val container = ModLoadingContext.get().activeContainer
 

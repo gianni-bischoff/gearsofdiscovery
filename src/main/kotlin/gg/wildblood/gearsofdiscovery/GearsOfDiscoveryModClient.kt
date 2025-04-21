@@ -6,6 +6,7 @@ import net.neoforged.bus.api.SubscribeEvent
 import net.neoforged.fml.ModLoadingContext
 import net.neoforged.fml.common.EventBusSubscriber
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent
 import net.neoforged.neoforge.client.gui.ConfigurationScreen
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory
 
@@ -22,6 +23,8 @@ object GearsOfDiscoveryModClient {
 
         val container = ModLoadingContext.get().activeContainer
 
+        //CuriosRendererRegistry.register(ModItems.MINERS_BACKPACK) { BackpackRenderer() }
+
         container.registerExtensionPoint(
             IConfigScreenFactory::class.java,
             IConfigScreenFactory { _, screen ->
@@ -29,4 +32,9 @@ object GearsOfDiscoveryModClient {
             }
         )
     }
+
+    @SubscribeEvent
+    private fun onRegisterMenuScreens(event: RegisterMenuScreensEvent) {
+    }
+
 }

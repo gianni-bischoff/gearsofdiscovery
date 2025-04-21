@@ -1,0 +1,9 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "gearsofdiscovery:item/miners_backpack"
+  },
+  "properties": {
+    "hand_animation_on_swap": false
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "food",
+  "ingredients": [
+    {
+      "item": "gearsofdiscovery:salt"
+    },
+    {
+      "item": "create:dough"
+    }
+  ],
+  "result": {
+    "id": "gearsofdiscovery:salted_dough",
+    "count": 1
+  }
+}
