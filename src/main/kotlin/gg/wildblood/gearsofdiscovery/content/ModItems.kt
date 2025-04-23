@@ -21,10 +21,10 @@ object ModItems {
     val WETZEL_PRETZEL: Item by REGISTRY.register("wetzelpretzel") { ->
         BasicTooltipItem(Item.Properties().food(FoodProperties.Builder()
                 .alwaysEdible()
-                .nutrition(6)
-                .saturationModifier(6.0f)
+                .nutrition(7)
+                .saturationModifier(1.5f)
                 .build()
-            ).rarity(Rarity.RARE)
+            ).rarity(Rarity.EPIC)
         ).withTooltip(Component.translatable("item.${GearsOfDiscoveryMod.MODID}.wetzelpretzel.tooltip"))
     }
 

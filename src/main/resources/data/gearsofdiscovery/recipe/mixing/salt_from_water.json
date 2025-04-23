@@ -3,13 +3,16 @@
   "ingredients": [
     {
       "type": "fluid_stack",
-      "amount": 250,
+      "amount": 50,
       "fluid": "minecraft:water"
+    },
+    {
+      "item": "minecraft:diorite"
     }
   ],
   "results": [
     {
-      "id": "gearsofdiscovery:salt"
+      "id": "expandeddelight:salt"
     }
   ]
 }

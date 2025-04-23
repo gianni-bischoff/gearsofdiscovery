@@ -3,9 +3,7 @@ package gg.wildblood.gearsofdiscovery.config
 import gg.wildblood.gearsofdiscovery.GearsOfDiscoveryMod
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.resources.ResourceLocation
-import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
-import net.minecraft.world.item.Items
 import net.neoforged.bus.api.SubscribeEvent
 import net.neoforged.fml.common.EventBusSubscriber
 import net.neoforged.fml.event.config.ModConfigEvent
@@ -35,16 +33,9 @@ object Config {
         .translation("config.${GearsOfDiscoveryMod.MODID}.startingEquipment")
         .defineList("startingEquipment", listOf("minecraft:iron_ingot#2")) { itemName -> validateItemName(itemName) }
 
-    private val DISCORD_CLIENT_ID: ModConfigSpec.ConfigValue<String> =
-        BUILDER.comment("Whenever its possible for a Crafting Recipe to get Locket")
-            .translation("config.${GearsOfDiscoveryMod.MODID}.craftLock")
-            .define("client_id", "xxx")
-
-    private val DISCORD_SECRET: ModConfigSpec.ConfigValue<String> =
-        BUILDER.comment("Whenever its possible for a Crafting Recipe to get Locket")
-            .translation("config.${GearsOfDiscoveryMod.MODID}.craftLock")
-            .define("client_id", "xxx")
-
+    private val DAILY_EQUIPMENT_STRINGS = BUILDER.comment("Daily Login Bonus for players")
+        .translation("config.${GearsOfDiscoveryMod.MODID}.dailyEquipment")
+        .defineList("dailyEquipment", listOf("minecraft:iron_ingot#1")) { itemName -> validateItemName(itemName) }
 
 
     val SPEC: ModConfigSpec = BUILDER.build()
@@ -53,8 +44,7 @@ object Config {
     var itemUseLock: Boolean = true
     var craftLock: Boolean = true
     var startingEquipment: List<ItemStack> = listOf()
-    var discordClientId: String = ""
-    var discordSecret: String = ""
+    var dailyEquipment: List<ItemStack> = listOf()
 
     private fun validateItemName(obj: Any): Boolean = obj is String && BuiltInRegistries.ITEM.containsKey(ResourceLocation.parse(obj.substringBefore('#'))) && obj.substringAfter('#').toIntOrNull() != null
 
@@ -65,6 +55,10 @@ object Config {
             itemUseLock = ITEM_USE_LOCK.get()
             craftLock = CRAFT_LOCK.get()
             startingEquipment = STARTING_EQUIPMENT_STRINGS.get().map {
+                val item = BuiltInRegistries.ITEM.get(ResourceLocation.parse(it.substringBefore('#')))
+                ItemStack(item, it.substringAfter("#").toInt())
+            }.toList()
+            dailyEquipment = DAILY_EQUIPMENT_STRINGS.get().map {
                 val item = BuiltInRegistries.ITEM.get(ResourceLocation.parse(it.substringBefore('#')))
                 ItemStack(item, it.substringAfter("#").toInt())
             }.toList()
