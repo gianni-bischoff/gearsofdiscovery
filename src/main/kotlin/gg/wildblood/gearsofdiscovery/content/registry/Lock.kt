@@ -27,7 +27,7 @@ data class Lock(
         DIMENSION_TRAVEL("dimension:travel");
 
         companion object {
-            fun from(displayName: String) = entries.firstOrNull() { it.displayName == displayName } ?: ITEM_USE
+            fun from(displayName: String) = entries.firstOrNull { it.displayName == displayName } ?: ITEM_USE
             val CODEC: Codec<Type> = Codec.STRING.xmap(Companion::from, Type::displayName)
         }
     }

@@ -23,8 +23,6 @@ object GearsOfDiscoveryModClient {
 
         val container = ModLoadingContext.get().activeContainer
 
-        //CuriosRendererRegistry.register(ModItems.MINERS_BACKPACK) { BackpackRenderer() }
-
         container.registerExtensionPoint(
             IConfigScreenFactory::class.java,
             IConfigScreenFactory { _, screen ->

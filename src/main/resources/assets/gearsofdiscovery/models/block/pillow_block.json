@@ -1,9 +1,0 @@
-{
-  "parent": "block/block",
-  "loader": "neoforge:obj",
-  "model": "gearsofdiscovery:models/block/pillow_block.obj",
-  "textures": {
-    "all": "gearsofdiscovery:block/pillow_block",
-    "particle": "#all"
-  }
-}

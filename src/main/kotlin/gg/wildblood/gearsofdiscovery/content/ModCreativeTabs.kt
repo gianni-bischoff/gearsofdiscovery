@@ -19,7 +19,6 @@ object ModCreativeTabs {
             .withTabsBefore(CreativeModeTabs.COMBAT)
             .icon { ModItems.HYPERSPEED_TOTEM.defaultInstance }
             .displayItems { _: ItemDisplayParameters?, output: CreativeModeTab.Output ->
-                output.accept(ModBlocks.PILLOW_ITEM)
                 output.accept(ModItems.OTOMATON)
                 output.accept(ModItems.HYPERSPEED_TOTEM)
                 output.accept(ModItems.WETZEL_PRETZEL)

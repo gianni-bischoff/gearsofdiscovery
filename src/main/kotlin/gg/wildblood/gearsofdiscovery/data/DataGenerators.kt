@@ -29,5 +29,6 @@ object DataGenerators {
         ))
 
         generator.addProvider(event.includeServer(), ModCuriosDataProvider(packOutput, existingFileHelper, lookup))
+        generator.addProvider(event.includeServer(), QuestDataProvider(packOutput, lookup, existingFileHelper))
     }
 }

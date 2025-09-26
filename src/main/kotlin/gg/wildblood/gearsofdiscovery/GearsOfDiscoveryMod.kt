@@ -20,8 +20,6 @@ object GearsOfDiscoveryMod {
     val LOGGER = LogUtils.getLogger();
 
     init {
-        LOGGER.info("Hello NeoForge world!")
-
         ModBlocks.REGISTRY.register(MOD_BUS)
         ModItems.REGISTRY.register(MOD_BUS)
         ModCreativeTabs.REGISTRY.register(MOD_BUS)

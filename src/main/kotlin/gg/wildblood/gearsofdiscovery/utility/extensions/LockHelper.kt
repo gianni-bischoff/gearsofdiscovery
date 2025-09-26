@@ -2,6 +2,7 @@ package gg.wildblood.gearsofdiscovery.utility.extensions
 
 import gg.wildblood.gearsofdiscovery.content.ModRegistries
 import gg.wildblood.gearsofdiscovery.content.registry.Lock
+import gg.wildblood.gearsofdiscovery.content.registry.quests.QuestDefinition
 import net.minecraft.client.Minecraft
 import net.minecraft.core.Registry
 import net.minecraft.core.registries.BuiltInRegistries
@@ -53,6 +54,8 @@ fun Registry<Lock>.locksWithType(type: Lock.Type): List<Lock> = this.filter { it
 fun Registry<Lock>.locksWithType(vararg type: Lock.Type): List<Lock> = this.filter { lock -> lock.enabled && lock.actions.keys.any { it in type} }
 
 fun Minecraft.tryGetLockRegistry() = connection?.registryAccess()?.registry(ModRegistries.LOCK_REGISTRY_KEY)?.getOrNull()
+
+fun Minecraft.tryGetQuestRegistry() = connection?.registryAccess()?.registry(ModRegistries.QUEST_REGISTRY_KEY)?.getOrNull()
 
 fun ResourceLocation.asString(): String = this.namespace + ":" + this.path
 
