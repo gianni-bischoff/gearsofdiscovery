@@ -12,10 +12,10 @@ import net.minecraft.network.chat.ClickEvent
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.Style
 
-object QuestCommand {
+object QuestTestCommand {
     fun register(dispatcher: CommandDispatcher<CommandSourceStack>) {
         dispatcher.register(
-            Commands.literal("quest")
+            Commands.literal("questtest")
                 .executes { context -> listQuests(context); 0}
                 .requires { p -> p.hasPermission(4) }
                 .then(Commands.literal("list").executes { context -> listQuests(context); 0 })
@@ -46,7 +46,7 @@ object QuestCommand {
             messageText.append(
                 Component.literal("\n- ${quest.title} (${quest.id})")
                     .withStyle(ChatFormatting.GREEN)
-                    .withStyle(Style.EMPTY.withClickEvent(ClickEvent(ClickEvent.Action.RUN_COMMAND, "/quest detail ${quest.id}")))
+                    .withStyle(Style.EMPTY.withClickEvent(ClickEvent(ClickEvent.Action.RUN_COMMAND, "/questtest detail ${quest.id}")))
             )
         }
 
@@ -68,7 +68,7 @@ object QuestCommand {
         val message = Component.literal("").withStyle(ChatFormatting.GRAY)
             .append(Component.literal("\nQuest Info - ${quest.title}\n").withStyle(ChatFormatting.BOLD).withStyle(ChatFormatting.UNDERLINE).withStyle(ChatFormatting.WHITE))
             .append("\nID: ${quest.id}")
-            .append("\nType: ${quest.type}")
+            .append("\nType: ${quest.type.displayName}")
             .append("\nDescription: ${quest.description}")
 
         // Show requirements

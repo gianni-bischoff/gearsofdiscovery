@@ -3,7 +3,9 @@ package gg.wildblood.gearsofdiscovery.data
 import gg.wildblood.gearsofdiscovery.GearsOfDiscoveryMod
 import gg.wildblood.gearsofdiscovery.content.ModRegistries.QUEST_REGISTRY_KEY
 import gg.wildblood.gearsofdiscovery.content.registry.quests.QuestDefinition
+import gg.wildblood.gearsofdiscovery.content.registry.quests.ItemTarget
 import gg.wildblood.gearsofdiscovery.content.registry.quests.objectives.CollectObjective
+import gg.wildblood.gearsofdiscovery.content.registry.quests.objectives.DeliverObjective
 import gg.wildblood.gearsofdiscovery.content.registry.quests.rewards.ItemRewardDefinition
 import gg.wildblood.gearsofdiscovery.content.registry.quests.rewards.MoneyRewardDefinition
 import net.minecraft.core.RegistrySetBuilder
@@ -50,15 +52,15 @@ class QuestDataProvider(
         // Tutorial quest
         quests.add(QuestDefinition(
             id = "first_steps",
-            type = "solo",
+            type = QuestDefinition.Type.SOLO,
             title = "quest.first_steps.title",
             description = "quest.first_steps.desc",
             requirements = listOf(),
             objectives = listOf(
-                CollectObjective("minecraft:wood", 10)
+                DeliverObjective(ItemTarget(itemTag = "minecraft:logs"), 10)
             ),
             rewards = listOf(
-                ItemRewardDefinition("minecraft:stone_axe", 1),
+                ItemRewardDefinition(ItemTarget(itemId = "minecraft:stone_axe"), 1),
                 MoneyRewardDefinition(25)
             ),
             meta = mapOf("version" to "1", "category" to "tutorial")
@@ -67,17 +69,17 @@ class QuestDataProvider(
         // Progression quest
         quests.add(QuestDefinition(
             id = "iron_age",
-            type = "solo", 
+            type = QuestDefinition.Type.SOLO,
             title = "quest.iron_age.title",
             description = "quest.iron_age.desc",
             requirements = listOf("quest:tutorial/first_steps"),
             objectives = listOf(
-                CollectObjective("minecraft:iron_ingot", 20),
-                CollectObjective("minecraft:coal", 32)
+                CollectObjective(ItemTarget(itemId = "minecraft:iron_ingot"), 20),
+                CollectObjective(ItemTarget(itemId = "minecraft:coal"), 32)
             ),
             rewards = listOf(
-                ItemRewardDefinition("minecraft:iron_pickaxe", 1),
-                ItemRewardDefinition("minecraft:iron_sword", 1),
+                ItemRewardDefinition(ItemTarget(itemId = "minecraft:iron_pickaxe"), 1),
+                ItemRewardDefinition(ItemTarget(itemId = "minecraft:iron_sword"), 1),
                 MoneyRewardDefinition(100)
             ),
             meta = mapOf("version" to "1", "category" to "progression")
@@ -86,18 +88,18 @@ class QuestDataProvider(
         // Resource gathering quest
         quests.add(QuestDefinition(
             id = "food_storage",
-            type = "solo",
+            type = QuestDefinition.Type.SOLO,
             title = "quest.food_storage.title", 
             description = "quest.food_storage.desc",
             requirements = listOf(),
             objectives = listOf(
-                CollectObjective("minecraft:wheat", 64),
-                CollectObjective("minecraft:carrot", 32),
-                CollectObjective("minecraft:potato", 32)
+                CollectObjective(ItemTarget(itemId = "minecraft:wheat"), 64),
+                CollectObjective(ItemTarget(itemId = "minecraft:carrot"), 32),
+                CollectObjective(ItemTarget(itemId = "minecraft:potato"), 32)
             ),
             rewards = listOf(
-                ItemRewardDefinition("minecraft:bread", 20),
-                ItemRewardDefinition("minecraft:golden_apple", 2),
+                ItemRewardDefinition(ItemTarget(itemId = "minecraft:bread"), 20),
+                ItemRewardDefinition(ItemTarget(itemId = "minecraft:golden_apple"), 2),
                 MoneyRewardDefinition(75)
             ),
             meta = mapOf("version" to "1", "category" to "gathering")

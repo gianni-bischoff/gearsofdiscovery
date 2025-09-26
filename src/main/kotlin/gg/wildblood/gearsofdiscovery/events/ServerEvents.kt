@@ -3,7 +3,7 @@ package gg.wildblood.gearsofdiscovery.events
 import gg.wildblood.gearsofdiscovery.GearsOfDiscoveryMod
 import gg.wildblood.gearsofdiscovery.GearsOfDiscoveryMod.LOGGER
 import gg.wildblood.gearsofdiscovery.content.commands.LockCommand
-import gg.wildblood.gearsofdiscovery.content.commands.QuestCommand
+import gg.wildblood.gearsofdiscovery.content.commands.QuestTestCommand
 import gg.wildblood.gearsofdiscovery.config.Config
 import gg.wildblood.gearsofdiscovery.content.ModDataAttachments
 import gg.wildblood.gearsofdiscovery.network.ModClientPayloadHandler
@@ -57,7 +57,7 @@ object ServerEvents {
     @SubscribeEvent
     fun onRegisterCommandsEvent(event: RegisterCommandsEvent) {
         LockCommand.register(event.dispatcher)
-        QuestCommand.register(event.dispatcher)
+        QuestTestCommand.register(event.dispatcher)
     }
 }
 

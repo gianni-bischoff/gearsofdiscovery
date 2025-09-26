@@ -7,7 +7,7 @@ import gg.wildblood.gearsofdiscovery.content.registry.quests.rewards.RewardCodec
 
 data class QuestDefinition(
     val id: String,
-    val type: String,
+    val type: Type,
     val title: String,
     val description: String,
     val requirements: List<String> = listOf(),
@@ -15,11 +15,22 @@ data class QuestDefinition(
     val rewards: List<RewardDefinition> = listOf(),
     val meta: Map<String, String> = mapOf()
 ) {
+    enum class Type(val displayName: String) {
+        SOLO("solo"),
+        GROUP("group"),
+        WORLD("world");
+
+        companion object {
+            fun from(displayName: String) = entries.firstOrNull { it.displayName == displayName } ?: SOLO
+            val CODEC: Codec<Type> = Codec.STRING.xmap(Companion::from, Type::displayName)
+        }
+    }
+
     companion object {
         val CODEC: Codec<QuestDefinition> = RecordCodecBuilder.create { instance: RecordCodecBuilder.Instance<QuestDefinition> ->
             instance.group(
                 Codec.STRING.fieldOf("id").forGetter(QuestDefinition::id),
-                Codec.STRING.fieldOf("type").forGetter(QuestDefinition::type),
+                Type.CODEC.fieldOf("type").forGetter(QuestDefinition::type),
                 Codec.STRING.fieldOf("title").forGetter(QuestDefinition::title),
                 Codec.STRING.fieldOf("description").forGetter(QuestDefinition::description),
                 Codec.list(Codec.STRING).optionalFieldOf("requirements", listOf()).forGetter(QuestDefinition::requirements),

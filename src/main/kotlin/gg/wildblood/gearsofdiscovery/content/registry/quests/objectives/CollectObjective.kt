@@ -3,27 +3,25 @@ package gg.wildblood.gearsofdiscovery.content.registry.quests.objectives
 import com.mojang.serialization.Codec
 import com.mojang.serialization.codecs.RecordCodecBuilder
 import gg.wildblood.gearsofdiscovery.content.registry.quests.ObjectiveDefinition
-import gg.wildblood.gearsofdiscovery.utility.extensions.ItemUtilities
+import gg.wildblood.gearsofdiscovery.content.registry.quests.ItemTarget
 import net.minecraft.world.entity.player.Player
 
-class CollectObjective(val itemId: String, val quantity: Int = 1) : ObjectiveDefinition {
+class CollectObjective(val itemTarget: ItemTarget, val quantity: Int = 1) : ObjectiveDefinition {
 
     companion object {
         val CODEC: Codec<CollectObjective> = RecordCodecBuilder.create { instance: RecordCodecBuilder.Instance<CollectObjective> ->
             instance.group(
-                Codec.STRING.fieldOf("target").forGetter(CollectObjective::itemId),
+                ItemTarget.CODEC.fieldOf("target").forGetter(CollectObjective::itemTarget),
                 Codec.INT.fieldOf("amount").forGetter(CollectObjective::quantity),
             ).apply(instance, ::CollectObjective)
         }
     }
 
-    override fun description(): String = "Collect $quantity of $itemId"
+    override fun description(): String = "Collect $quantity of ${itemTarget.getDescription()}"
 
     override fun check(player: Player): Boolean {
-        val targetItem = ItemUtilities.getItemById(itemId) ?: return false
-
         val itemCount = player.inventory.items
-            .filter { itemStack -> itemStack.`is`(targetItem) }
+            .filter { itemStack -> itemTarget.matches(itemStack) }
             .sumOf { it.count }
 
         return itemCount >= quantity
