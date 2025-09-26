@@ -12,6 +12,11 @@ object RewardCodecs {
     val BY_ID = ConcurrentHashMap<String, Codec<out RewardDefinition>>();
     val BY_CLASS = ConcurrentHashMap<KClass<out RewardDefinition>, Codec<out RewardDefinition>>();
 
+    init {
+        register(ItemRewardDefinition.CODEC, "item_reward", ItemRewardDefinition::class)
+        register(MoneyRewardDefinition.CODEC, "money_reward", MoneyRewardDefinition::class)
+        register(XPRewardDefinition.CODEC, "xp_reward", XPRewardDefinition::class)
+    }
 
     fun <T : RewardDefinition> register(codec: Codec<T>, id: String, clazz: KClass<T>) {
         if(BY_ID.putIfAbsent(id, codec) != null) {
@@ -30,7 +35,21 @@ object RewardCodecs {
             val codec = BY_CLASS[input::class] as? Codec<RewardDefinition>
                 ?: return DataResult.error { "No codec found for reward class: ${input::class}" }
             
-            return codec.encode(input, ops, prefix)
+            // Find the type ID for this class
+            val typeId = BY_ID.entries.find { it.value == codec }?.key
+                ?: return DataResult.error { "No type ID found for reward class: ${input::class}" }
+            
+            // Encode the object first
+            val encodedResult = codec.encode(input, ops, prefix)
+            if (encodedResult.error().isPresent) {
+                return encodedResult
+            }
+            
+            val encoded = encodedResult.result().get()
+            
+            // Add the type field to the encoded object
+            val withType = ops.set(encoded, "type", ops.createString(typeId))
+            return DataResult.success(withType)
         }
 
         override fun <T> decode(ops: DynamicOps<T>, input: T): DataResult<com.mojang.datafixers.util.Pair<RewardDefinition, T>> {

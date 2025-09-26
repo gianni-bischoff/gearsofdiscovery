@@ -12,10 +12,6 @@ class MoneyRewardDefinition(val amount: Int) : RewardDefinition {
                 Codec.INT.fieldOf("amount").forGetter(MoneyRewardDefinition::amount),
             ).apply(instance, ::MoneyRewardDefinition)
         }
-        
-        init {
-            RewardCodecs.register(CODEC, "money_reward", MoneyRewardDefinition::class)
-        }
     }
 
     override fun description(): String = "You will receive $amount coins"

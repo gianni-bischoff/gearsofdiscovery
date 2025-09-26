@@ -3,9 +3,7 @@ package gg.wildblood.gearsofdiscovery.content.registry.quests.objectives
 import com.mojang.serialization.Codec
 import com.mojang.serialization.DataResult
 import com.mojang.serialization.DynamicOps
-import com.mojang.serialization.MapCodec
 import gg.wildblood.gearsofdiscovery.content.registry.quests.ObjectiveDefinition
-import gg.wildblood.gearsofdiscovery.content.registry.quests.RewardDefinition
 import java.util.Optional
 import java.util.concurrent.ConcurrentHashMap
 import kotlin.reflect.KClass
@@ -13,6 +11,11 @@ import kotlin.reflect.KClass
 object ObjectiveCodecs {
     val BY_ID = ConcurrentHashMap<String, Codec<out ObjectiveDefinition>>();
     val BY_CLASS = ConcurrentHashMap<KClass<out ObjectiveDefinition>, Codec<out ObjectiveDefinition>>();
+
+    init {
+        register(DeliverObjective.CODEC, "deliver_objective", DeliverObjective::class)
+        register(CollectObjective.CODEC, "collect_objective", CollectObjective::class)
+    }
 
     fun <T : ObjectiveDefinition> register(codec: Codec<T>, id: String, clazz: KClass<T>) {
         if(BY_ID.putIfAbsent(id, codec) != null) {
@@ -32,7 +35,21 @@ object ObjectiveCodecs {
             val codec = (BY_CLASS[input::class] as? Codec<ObjectiveDefinition>)
                 ?: return DataResult.error { "No codec found for objective class: ${input::class}" }
             
-            return codec.encode(input, ops, prefix)
+            // Find the type ID for this class
+            val typeId = BY_ID.entries.find { it.value == codec }?.key
+                ?: return DataResult.error { "No type ID found for objective class: ${input::class}" }
+            
+            // Encode the object first
+            val encodedResult = codec.encode(input, ops, prefix)
+            if (encodedResult.error().isPresent) {
+                return encodedResult
+            }
+            
+            val encoded = encodedResult.result().get()
+            
+            // Add the type field to the encoded object
+            val withType = ops.set(encoded, "type", ops.createString(typeId))
+            return DataResult.success(withType)
         }
 
         override fun <T> decode(ops: DynamicOps<T>, input: T): DataResult<com.mojang.datafixers.util.Pair<ObjectiveDefinition, T>> {

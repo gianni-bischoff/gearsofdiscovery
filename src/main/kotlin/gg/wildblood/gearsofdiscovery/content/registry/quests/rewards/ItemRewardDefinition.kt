@@ -14,9 +14,6 @@ class ItemRewardDefinition(val itemId: String, val quantity: Int = 1) : RewardDe
                 Codec.INT.fieldOf("count").forGetter(ItemRewardDefinition::quantity),
             ).apply(instance, ::ItemRewardDefinition)
         }
-        init {
-            RewardCodecs.register(CODEC, "item_reward", ItemRewardDefinition::class)
-        }
     }
 
     override fun description(): String = "You will receive $quantity $itemId"

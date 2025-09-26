@@ -12,9 +12,6 @@ class XPRewardDefinition(val quantity: Int = 1) : RewardDefinition {
                 Codec.INT.fieldOf("quantity").forGetter(XPRewardDefinition::quantity),
             ).apply(instance, ::XPRewardDefinition)
         }
-        init {
-            RewardCodecs.register(CODEC, "xp_reward", XPRewardDefinition::class)
-        }
     }
 
     override fun description(): String = "Gain $quantity experience points"

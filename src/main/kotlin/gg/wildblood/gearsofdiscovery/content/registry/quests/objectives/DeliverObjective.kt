@@ -15,10 +15,6 @@ class DeliverObjective(val itemId: String, val quantity: Int = 1) : ObjectiveDef
                 Codec.INT.fieldOf("quantity").forGetter(DeliverObjective::quantity),
             ).apply(instance, ::DeliverObjective)
         }
-        
-        init {
-            ObjectiveCodecs.register(CODEC, "deliver_objective", DeliverObjective::class)
-        }
     }
 
     override fun description(): String = "Collect and Deliver $quantity of $itemId"

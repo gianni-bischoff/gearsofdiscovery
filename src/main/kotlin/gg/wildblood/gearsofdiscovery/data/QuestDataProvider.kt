@@ -49,7 +49,7 @@ class QuestDataProvider(
     private fun generateExampleQuests(quests: MutableList<QuestDefinition>) {
         // Tutorial quest
         quests.add(QuestDefinition(
-            id = "tutorial/first_steps",
+            id = "first_steps",
             type = "solo",
             title = "quest.first_steps.title",
             description = "quest.first_steps.desc",
@@ -66,7 +66,7 @@ class QuestDataProvider(
         
         // Progression quest
         quests.add(QuestDefinition(
-            id = "progression/iron_age",
+            id = "iron_age",
             type = "solo", 
             title = "quest.iron_age.title",
             description = "quest.iron_age.desc",
@@ -85,7 +85,7 @@ class QuestDataProvider(
         
         // Resource gathering quest
         quests.add(QuestDefinition(
-            id = "gathering/food_storage",
+            id = "food_storage",
             type = "solo",
             title = "quest.food_storage.title", 
             description = "quest.food_storage.desc",

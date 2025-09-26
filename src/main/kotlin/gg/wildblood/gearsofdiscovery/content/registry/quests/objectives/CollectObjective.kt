@@ -15,10 +15,6 @@ class CollectObjective(val itemId: String, val quantity: Int = 1) : ObjectiveDef
                 Codec.INT.fieldOf("amount").forGetter(CollectObjective::quantity),
             ).apply(instance, ::CollectObjective)
         }
-        
-        init {
-            ObjectiveCodecs.register(CODEC, "collect_objective", CollectObjective::class)
-        }
     }
 
     override fun description(): String = "Collect $quantity of $itemId"
