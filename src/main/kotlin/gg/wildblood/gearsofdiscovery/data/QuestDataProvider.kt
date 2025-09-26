@@ -72,7 +72,7 @@ class QuestDataProvider(
             type = QuestDefinition.Type.SOLO,
             title = "quest.iron_age.title",
             description = "quest.iron_age.desc",
-            requirements = listOf("quest:tutorial/first_steps"),
+            requirements = listOf("quest:first_steps"),
             objectives = listOf(
                 CollectObjective(ItemTarget(itemId = "minecraft:iron_ingot"), 20),
                 CollectObjective(ItemTarget(itemId = "minecraft:coal"), 32)
