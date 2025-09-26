@@ -63,7 +63,8 @@ class QuestDataProvider(
                 ItemRewardDefinition(ItemTarget(itemId = "minecraft:stone_axe"), 1),
                 MoneyRewardDefinition(25)
             ),
-            meta = mapOf("version" to "1", "category" to "tutorial")
+            meta = mapOf("version" to "1", "category" to "tutorial"),
+            icon = "minecraft:wooden_axe"
         ))
         
         // Progression quest
@@ -82,7 +83,8 @@ class QuestDataProvider(
                 ItemRewardDefinition(ItemTarget(itemId = "minecraft:iron_sword"), 1),
                 MoneyRewardDefinition(100)
             ),
-            meta = mapOf("version" to "1", "category" to "progression")
+            meta = mapOf("version" to "1", "category" to "progression"),
+            icon = "minecraft:iron_pickaxe"
         ))
         
         // Resource gathering quest
@@ -102,7 +104,8 @@ class QuestDataProvider(
                 ItemRewardDefinition(ItemTarget(itemId = "minecraft:golden_apple"), 2),
                 MoneyRewardDefinition(75)
             ),
-            meta = mapOf("version" to "1", "category" to "gathering")
+            meta = mapOf("version" to "1", "category" to "gathering"),
+            icon = "minecraft:wheat"
         ))
     }
 

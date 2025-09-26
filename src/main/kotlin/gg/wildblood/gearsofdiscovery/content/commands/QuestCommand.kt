@@ -4,6 +4,8 @@ import com.mojang.brigadier.CommandDispatcher
 import com.mojang.brigadier.arguments.StringArgumentType
 import com.mojang.brigadier.context.CommandContext
 import gg.wildblood.gearsofdiscovery.content.registry.quests.QuestManager
+import gg.wildblood.gearsofdiscovery.client.ui.quest.QuestTreeScreen
+import net.minecraft.server.level.ServerPlayer
 import net.minecraft.ChatFormatting
 import net.minecraft.commands.CommandSourceStack
 import net.minecraft.commands.Commands
@@ -43,6 +45,9 @@ object QuestCommand {
                 .then(Commands.literal("completed")
                     .executes { context -> showCompletedQuests(context); 0 }
                 )
+                .then(Commands.literal("tree")
+                    .executes { context -> openQuestTree(context); 0 }
+                )
         )
     }
     
@@ -79,6 +84,14 @@ object QuestCommand {
                     .withStyle(Style.EMPTY.withClickEvent(ClickEvent(ClickEvent.Action.RUN_COMMAND, "/quest completed")))
             )
             .append(Component.literal(" - Show completed quests║\n").withStyle(ChatFormatting.WHITE))
+            .append(Component.literal("║ ").withStyle(ChatFormatting.WHITE))
+            .append(
+                Component.literal("/quest tree").withStyle(ChatFormatting.LIGHT_PURPLE)
+                    .withStyle(Style.EMPTY.withClickEvent(ClickEvent(ClickEvent.Action.RUN_COMMAND, "/quest tree")))
+            )
+            .append(Component.literal(" - Open quest tree UI    ║\n").withStyle(ChatFormatting.WHITE))
+            .append(Component.literal("║ ").withStyle(ChatFormatting.WHITE))
+            .append(Component.literal("Press 'K' - Open quest tree GUI      ║\n").withStyle(ChatFormatting.AQUA))
             .append(Component.literal("║                                       ║\n").withStyle(ChatFormatting.WHITE))
             .append(Component.literal("╚═══════════════════════════════════════╝").withStyle(ChatFormatting.GOLD))
         
@@ -323,5 +336,21 @@ object QuestCommand {
         }
         
         context.source.sendSuccess({ message }, false)
+    }
+    
+    private fun openQuestTree(context: CommandContext<CommandSourceStack>) {
+        val player = context.source.playerOrException
+        
+        if (player is ServerPlayer) {
+            // For now, send a message indicating the quest tree feature
+            // In a full implementation, this would send a network packet to open the client-side GUI
+            val message = Component.literal("")
+                .append(Component.literal("Quest Tree UI\n").withStyle(ChatFormatting.GOLD, ChatFormatting.BOLD))
+                .append(Component.literal("The quest tree UI is available. ").withStyle(ChatFormatting.WHITE))
+                .append(Component.literal("Press 'K' to open the quest tree interface.\n").withStyle(ChatFormatting.YELLOW))
+                .append(Component.literal("(This feature requires client-side integration)").withStyle(ChatFormatting.GRAY))
+            
+            context.source.sendSuccess({ message }, false)
+        }
     }
 }

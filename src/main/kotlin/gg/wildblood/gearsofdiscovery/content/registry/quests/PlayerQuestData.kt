@@ -58,15 +58,20 @@ data class PlayerQuestData(
     fun updateProgress(player: Player, questRegistry: Map<String, QuestDefinition>): List<String> {
         val newlyCompletableQuests = mutableListOf<String>()
         
-        acceptedQuests.forEach { (questId, questInstance) ->
+        acceptedQuests.keys.toList().forEach { questId ->
+            val questInstance = acceptedQuests[questId] ?: return@forEach
             val questDefinition = questRegistry[questId] ?: return@forEach
             
             val wasCompletable = questInstance.checkCompletion(questDefinition, player)
-            questInstance.updateProgress(questDefinition, player)
-            val isNowCompletable = questInstance.checkCompletion(questDefinition, player)
+            val updatedInstance = questInstance.copy()
+            updatedInstance.updateProgress(questDefinition, player)
+            val isNowCompletable = updatedInstance.checkCompletion(questDefinition, player)
+            
+            // Store the updated instance back to the map
+            acceptedQuests[questId] = updatedInstance
             
             // If quest became completable for the first time, add to notification list
-            if (!wasCompletable && isNowCompletable && !questInstance.isCompleted) {
+            if (!wasCompletable && isNowCompletable && !updatedInstance.isCompleted) {
                 newlyCompletableQuests.add(questId)
             }
         }

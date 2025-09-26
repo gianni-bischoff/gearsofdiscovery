@@ -13,7 +13,8 @@ data class QuestDefinition(
     val requirements: List<String> = listOf(),
     val objectives: List<ObjectiveDefinition> = listOf(),
     val rewards: List<RewardDefinition> = listOf(),
-    val meta: Map<String, String> = mapOf()
+    val meta: Map<String, String> = mapOf(),
+    val icon: String? = null // Item ID for the quest icon (e.g., "minecraft:diamond_sword")
 ) {
     enum class Type(val displayName: String) {
         SOLO("solo"),
@@ -36,9 +37,10 @@ data class QuestDefinition(
                 Codec.list(Codec.STRING).optionalFieldOf("requirements", listOf()).forGetter(QuestDefinition::requirements),
                 Codec.list(ObjectiveCodecs.POLYMORPHIC_CODEC).optionalFieldOf("objectives", listOf()).forGetter(QuestDefinition::objectives),
                 Codec.list(RewardCodecs.POLYMORPHIC_CODEC).optionalFieldOf("rewards", listOf()).forGetter(QuestDefinition::rewards),
-                Codec.unboundedMap(Codec.STRING, Codec.STRING).optionalFieldOf("meta", mapOf()).forGetter(QuestDefinition::meta)
-            ).apply(instance) { id, type, title, description, requirements, objectives, rewards, meta ->
-                QuestDefinition(id, type, title, description, requirements, objectives, rewards, meta)
+                Codec.unboundedMap(Codec.STRING, Codec.STRING).optionalFieldOf("meta", mapOf()).forGetter(QuestDefinition::meta),
+                Codec.STRING.optionalFieldOf("icon").forGetter { java.util.Optional.ofNullable(it.icon) }
+            ).apply(instance) { id, type, title, description, requirements, objectives, rewards, meta, icon ->
+                QuestDefinition(id, type, title, description, requirements, objectives, rewards, meta, icon.orElse(null))
             }
         }
     }

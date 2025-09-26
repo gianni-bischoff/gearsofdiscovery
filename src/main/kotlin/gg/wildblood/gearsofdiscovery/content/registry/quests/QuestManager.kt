@@ -22,6 +22,9 @@ import java.util.*
 @EventBusSubscriber
 object QuestManager {
     
+    // Client-side cache for quest data
+    private val clientQuestCache = mutableMapOf<UUID, PlayerQuestData>()
+    
     /**
      * Gets the quest save data for the given player's level
      */
@@ -39,11 +42,31 @@ object QuestManager {
     fun getPlayerQuestData(player: Player): PlayerQuestData {
         val saveData = getQuestSaveData(player)
         return if (saveData != null) {
-            saveData.getPlayerQuestData(player.uuid)
+            // Server-side: use saved data
+            val serverData = saveData.getPlayerQuestData(player.uuid)
+            // Also update client cache if this is being called from server
+            clientQuestCache[player.uuid] = serverData
+            serverData
         } else {
-            // Fallback for client-side or when save data is not available
-            PlayerQuestData(player.uuid)
+            // Client-side: use cached data, or empty data if no cache
+            clientQuestCache.getOrPut(player.uuid) {
+                PlayerQuestData(player.uuid)
+            }
         }
+    }
+    
+    /**
+     * Updates the client-side cache with quest data
+     */
+    fun updateClientCache(playerId: UUID, questData: PlayerQuestData) {
+        clientQuestCache[playerId] = questData
+    }
+    
+    /**
+     * Clears client cache for a player (useful for logout/login)
+     */
+    fun clearClientCache(playerId: UUID) {
+        clientQuestCache.remove(playerId)
     }
     
     /**
@@ -103,8 +126,9 @@ object QuestManager {
         
         val newlyCompletableQuests = playerData.updateProgress(player, availableQuests)
         
-        // Save the updated quest data if there were changes
-        if (newlyCompletableQuests.isNotEmpty() || playerData.acceptedQuests.isNotEmpty()) {
+        // Always save the updated quest data when there are accepted quests
+        // since quest progress may have been updated even if no quests became newly completable
+        if (playerData.acceptedQuests.isNotEmpty()) {
             val saveData = getQuestSaveData(player)
             saveData?.setPlayerQuestData(player.uuid, playerData)
         }
